@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlinger Haus — Translator</title>
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#080808; color:#e0d8cc; min-height:100vh; padding:32px 20px; display:flex; align-items:flex-start; justify-content:center; }
+.wrap { max-width:720px; width:100%; }
+.page-tag { font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#C8A04A; margin-bottom:4px; }
+h1 { font-size:26px; font-weight:300; color:#f0ece4; margin-bottom:6px; }
+.page-sub { font-size:13px; color:#666; line-height:1.6; margin-bottom:24px; }
+.card { background:#111; border:1px solid #1e1e1e; border-radius:12px; padding:22px 24px; margin-bottom:14px; }
+.card-title { font-size:13px; font-weight:600; color:#e0d8cc; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.sn { width:22px; height:22px; border-radius:50%; background:#C8A04A; color:#080808; font-size:11px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+.card p, .card li { font-size:13px; color:#777; line-height:1.7; }
+.card a { color:#C8A04A; text-decoration:none; }
+.inp-row { display:flex; gap:8px; margin-top:12px; }
+.inp-row input { flex:1; background:#0d0d0d; border:1px solid #2a2520; border-radius:7px; padding:10px 14px; font-size:13px; color:#e0d8cc; font-family:monospace; outline:none; transition:border-color .2s; }
+.inp-row input:focus { border-color:rgba(200,160,74,.5); }
+.key-status { font-size:12px; margin-top:8px; min-height:16px; }
+
+/* Big status display */
+.big-status {
+  background:#0d0d0d; border:1px solid #1a1a1a; border-radius:10px;
+  padding:20px; margin:14px 0; text-align:center;
+}
+.big-num { font-size:52px; font-weight:300; color:#C8A04A; line-height:1; margin-bottom:6px; }
+.big-label { font-size:12px; color:#666; letter-spacing:.08em; text-transform:uppercase; }
+.big-current { font-size:13px; color:#8a8070; margin-top:8px; min-height:20px; font-style:italic; }
+
+.lang-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:14px 0; }
+.lc { background:#0d0d0d; border:1px solid #1a1a1a; border-radius:9px; padding:14px 10px; text-align:center; transition:border-color .3s; }
+.lc.active { border-color:#C8A04A; background:rgba(200,160,74,.05); }
+.lc.done { border-color:#2A6040; }
+.lf { font-size:22px; margin-bottom:5px; }
+.ln { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#8a8070; margin-bottom:6px; }
+.lcount { font-size:22px; font-weight:300; color:#C8A04A; line-height:1; }
+.ltot { font-size:10px; color:#444; margin-top:2px; }
+.lbar-bg { background:#1a1a1a; border-radius:3px; height:4px; margin-top:8px; overflow:hidden; }
+.lbar { height:100%; background:#C8A04A; border-radius:3px; width:0; transition:width .4s; }
+.lc.done .lbar { background:#2A6040; width:100% !important; }
+.lc.done .lcount { color:#6FC08A; }
+
+/* Overall bar */
+.ov { background:#0d0d0d; border:1px solid #1a1a1a; border-radius:9px; padding:16px; margin:14px 0; }
+.ov-top { display:flex; justify-content:space-between; font-size:13px; margin-bottom:10px; }
+.ov-lbl { color:#666; }
+.ov-pct { color:#C8A04A; font-weight:700; font-size:16px; }
+.ov-bar-bg { background:#1a1a1a; border-radius:4px; height:8px; overflow:hidden; }
+.ov-bar { height:100%; background:linear-gradient(90deg,#C8A04A,#8f6b2a); border-radius:4px; width:0; transition:width .4s; }
+.ov-sub { display:flex; justify-content:space-between; margin-top:8px; font-size:11px; color:#444; }
+
+.btn-row { display:flex; gap:8px; margin:14px 0; flex-wrap:wrap; }
+button { padding:10px 18px; border-radius:7px; font-size:13px; font-weight:500; cursor:pointer; border:1px solid #2a2520; background:#141414; color:#e0d8cc; transition:all .2s; font-family:inherit; }
+button:hover:not(:disabled) { border-color:#C8A04A; color:#C8A04A; }
+button:disabled { opacity:.35; cursor:not-allowed; }
+.btn-start { flex:1; background:linear-gradient(135deg,#C8A04A,#8f6b2a); color:#080808; border-color:transparent; font-weight:700; font-size:14px; padding:12px 24px; }
+.btn-start:hover:not(:disabled) { opacity:.88; color:#080808; border-color:transparent; }
+.btn-test { background:#0a0e1a; border-color:#1a2a4a; color:#6a8aaa; }
+.btn-dl { background:#0d2a1a; border-color:#1a5a32; color:#4caf7d; font-weight:600; }
+.btn-dl:hover:not(:disabled) { background:#112a1c; border-color:#2a7a4a; color:#6FC08A; }
+
+.log { background:#050505; border:1px solid #181818; border-radius:7px; padding:12px; font-size:11px; font-family:'SF Mono','Fira Code',monospace; color:#4a4a4a; height:180px; overflow-y:auto; line-height:1.75; }
+.log .ok   { color:#4caf7d; }
+.log .info { color:#C8A04A; }
+.log .err  { color:#e05050; }
+.log .dim  { color:#3a3a3a; }
+.log .prod { color:#7a9a7a; }
+
+.green-box { background:#0a1a0a; border:1px solid #1a4a1a; border-radius:8px; padding:12px 14px; margin-top:10px; font-size:12px; color:#5a9a6a; line-height:1.8; }
+.green-box strong { color:#6FC08A; }
+code { font-size:11px; background:#1a1a1a; padding:1px 5px; border-radius:3px; color:#C8A04A; }
+.spin { display:inline-block; width:10px; height:10px; border:2px solid rgba(200,160,74,.3); border-top-color:#C8A04A; border-radius:50%; animation:sp .7s linear infinite; vertical-align:middle; margin-right:4px; }
+@keyframes sp { to { transform:rotate(360deg); } }
+@media(max-width:600px){ .lang-grid { grid-template-columns:repeat(2,1fr); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="page-tag">Berlinger Haus</p>
+  <h1>Translation Tool</h1>
+  <p class="page-sub">Translates 752 product descriptions from Hungarian into German, Dutch, French and English using Claude Haiku. ~$4–5 total, ~20 minutes.</p>
+
+  <!-- KEY -->
+  <div class="card">
+    <div class="card-title"><span class="sn">1</span> Anthropic API Key</div>
+    <p>Get yours at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → Billing (add $5) → API Keys → Create Key</p>
+    <div class="inp-row">
+      <input type="password" id="keyInput" placeholder="sk-ant-api03-…">
+      <button onclick="saveKey()">Save</button>
+    </div>
+    <p class="key-status" id="keyStatus"></p>
+  </div>
+
+  <!-- TRANSLATE -->
+  <div class="card">
+    <div class="card-title"><span class="sn">2</span> Translation Progress</div>
+
+    <!-- BIG live counter -->
+    <div class="big-status">
+      <div class="big-num" id="bigNum">0</div>
+      <div class="big-label">of <span id="bigTotal">3008</span> translations complete</div>
+      <div class="big-current" id="bigCurrent">—</div>
+    </div>
+
+    <div class="lang-grid">
+      <div class="lc" id="lc-de"><div class="lf">🇩🇪</div><div class="ln">German</div><div class="lcount" id="n-de">0</div><div class="ltot">/ 752</div><div class="lbar-bg"><div class="lbar" id="bar-de"></div></div></div>
+      <div class="lc" id="lc-nl"><div class="lf">🇳🇱</div><div class="ln">Dutch</div><div class="lcount" id="n-nl">0</div><div class="ltot">/ 752</div><div class="lbar-bg"><div class="lbar" id="bar-nl"></div></div></div>
+      <div class="lc" id="lc-fr"><div class="lf">🇫🇷</div><div class="ln">French</div><div class="lcount" id="n-fr">0</div><div class="ltot">/ 752</div><div class="lbar-bg"><div class="lbar" id="bar-fr"></div></div></div>
+      <div class="lc" id="lc-en"><div class="lf">🇬🇧</div><div class="ln">English</div><div class="lcount" id="n-en">0</div><div class="ltot">/ 752</div><div class="lbar-bg"><div class="lbar" id="bar-en"></div></div></div>
+    </div>
+
+    <div class="ov">
+      <div class="ov-top">
+        <span class="ov-lbl" id="ovStatus">Ready</span>
+        <span class="ov-pct" id="ovPct">0%</span>
+      </div>
+      <div class="ov-bar-bg"><div class="ov-bar" id="ovBar"></div></div>
+      <div class="ov-sub">
+        <span id="ovDone">0 done</span>
+        <span id="ovEta"></span>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-start" id="startBtn" onclick="startAll()">▶ Start Translation</button>
+      <button id="stopBtn" onclick="stopAll()" disabled>⏹ Pause</button>
+      <button class="btn-test" onclick="testKey()">🔑 Test Key</button>
+      <button class="btn-dl" id="dlBtn" onclick="downloadResult()" disabled>⬇ Download</button>
+    </div>
+
+    <div class="log" id="log"><span class="dim">Click "Test Key" first to confirm your API key works.</span></div>
+
+    <div class="green-box">
+      ✅ <strong>Each translation shows live</strong> in the counter above as it completes.<br>
+      ✅ <strong>Progress auto-saves</strong> every 5 products — safe to close and reopen.<br>
+      ✅ <strong>Click "Test Key"</strong> first to confirm connection before starting.
+    </div>
+  </div>
+
+  <!-- DOWNLOAD -->
+  <div class="card">
+    <div class="card-title"><span class="sn">3</span> Replace your products file</div>
+    <p>When done, download the new <code>products_data.js</code> and replace the old one in your shop folder. All 4 language descriptions go live instantly.</p>
+  </div>
+</div>
+
+<script src="products_data.js"></script>
+<script>
+const LANGS = [
+  { code:'de', label:'German',  field:'desc_de', store:'bh_an2_de', name:'German'  },
+  { code:'nl', label:'Dutch',   field:'desc_nl', store:'bh_an2_nl', name:'Dutch'   },
+  { code:'fr', label:'French',  field:'desc_fr', store:'bh_an2_fr', name:'French'  },
+  { code:'en', label:'English', field:'desc_en', store:'bh_an2_en', name:'English' },
+];
+const TOTAL = typeof PRODUCTS !== 'undefined' ? PRODUCTS.length : 752;
+const GT = TOTAL * LANGS.length;
+
+let apiKey='', translations={}, running=false, stopFlag=false, startTime=null, doneAtStart=0;
+
+// ── Init ──────────────────────────────────────────────
+function init() {
+  const k = localStorage.getItem('bh_an2_key');
+  if (k) { apiKey=k; document.getElementById('keyInput').placeholder='✓ Key loaded'; setKS('✓ Key loaded — click Test Key to verify','#4caf7d'); }
+  translations = {};
+  LANGS.forEach(l => { try { const s=localStorage.getItem(l.store); translations[l.code]=s?JSON.parse(s):{}; } catch(e){ translations[l.code]={}; } });
+  updateUI();
+  if (typeof PRODUCTS==='undefined') { log('⚠ products_data.js not found — both files must be in same folder, opened via http://localhost:8000','err'); }
+  else {
+    log(`✓ Loaded ${PRODUCTS.length} products.`,'ok');
+    const d=countTotal();
+    if (d>0) log(`Already translated: ${d}/${GT}. Click Start to resume.`,'info');
+    else log(`Ready to translate ${GT} descriptions across 4 languages.`,'dim');
+  }
+}
+
+function saveKey() {
+  const k=document.getElementById('keyInput').value.trim();
+  if (!k.startsWith('sk-ant-')){ setKS('❌ Must start with sk-ant-','#e05050'); return; }
+  apiKey=k; localStorage.setItem('bh_an2_key',k);
+  document.getElementById('keyInput').value='';
+  document.getElementById('keyInput').placeholder='✓ Key saved';
+  setKS('✓ Saved — now click "Test Key" to verify it works','#4caf7d');
+  log('Key saved.','ok');
+}
+function setKS(m,c){ const e=document.getElementById('keyStatus'); e.textContent=m; e.style.color=c; }
+
+// ── Test key ──────────────────────────────────────────
+async function testKey() {
+  if (!apiKey){ log('Save your key first.','err'); return; }
+  log('Testing API key…','info');
+  document.getElementById('bigCurrent').textContent = 'Testing connection…';
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'x-api-key':apiKey, 'anthropic-version':'2023-06-01' },
+      body: JSON.stringify({ model:'claude-haiku-4-5-20251001', max_tokens:30, messages:[{role:'user',content:'Say "API works" in German in 3 words only.'}] })
+    });
+    if (resp.status===401){ log('❌ Invalid key — check console.anthropic.com → API Keys','err'); document.getElementById('bigCurrent').textContent='❌ Invalid key'; return; }
+    if (!resp.ok){ log('❌ Error: HTTP '+resp.status+' — check your billing at console.anthropic.com','err'); return; }
+    const data = await resp.json();
+    const reply = data.content[0].text;
+    log('✅ API works! Response: "'+reply+'"','ok');
+    log('You can now click Start Translation.','info');
+    document.getElementById('bigCurrent').textContent = '✅ API connected — ready to start!';
+    setKS('✅ Key verified and working','#4caf7d');
+  } catch(e) {
+    log('❌ Connection failed: '+e.message,'err');
+    log('Make sure you opened this via http://localhost:8000 (not file://)','err');
+    document.getElementById('bigCurrent').textContent = '❌ Connection failed — see log below';
+  }
+}
+
+// ── Counts ────────────────────────────────────────────
+function countLang(code) {
+  const t=translations[code]||{};
+  return typeof PRODUCTS!=='undefined' ? PRODUCTS.filter(p=>t[p.sku]&&t[p.sku].trim()).length : Object.keys(t).length;
+}
+function countTotal(){ return LANGS.reduce((s,l)=>s+countLang(l.code),0); }
+
+// ── UI update ─────────────────────────────────────────
+function updateUI(currentProduct) {
+  const grand=countTotal();
+  const pct=Math.round(grand*100/GT);
+  document.getElementById('ovBar').style.width=pct+'%';
+  document.getElementById('ovPct').textContent=pct+'%';
+  document.getElementById('bigNum').textContent=grand;
+  document.getElementById('ovDone').textContent=grand+' done';
+
+  LANGS.forEach(l=>{
+    const n=countLang(l.code);
+    document.getElementById('n-'+l.code).textContent=n;
+    document.getElementById('bar-'+l.code).style.width=Math.round(n*100/TOTAL)+'%';
+    document.getElementById('lc-'+l.code).classList.toggle('done',n===TOTAL);
+  });
+
+  if (currentProduct) document.getElementById('bigCurrent').textContent='Translating: '+currentProduct;
+
+  if (startTime && grand>doneAtStart) {
+    const rate=(grand-doneAtStart)/((Date.now()-startTime)/1000);
+    if (rate>0) {
+      const secs=Math.ceil((GT-grand)/rate);
+      const mins=Math.ceil(secs/60);
+      document.getElementById('ovEta').textContent = mins<=1?'< 1 min left':'~'+mins+' min left';
+    }
+  }
+  if (grand===GT) {
+    document.getElementById('dlBtn').disabled=false;
+    document.getElementById('ovStatus').textContent='✅ Complete!';
+    document.getElementById('bigCurrent').textContent='All done — click Download ↓';
+    document.getElementById('ovEta').textContent='';
+  }
+  return grand;
+}
+
+// ── API call ──────────────────────────────────────────
+async function translateOne(huText, langName) {
+  const prompt=`Translate this Hungarian product description to ${langName}. Write professionally and naturally for a premium kitchenware brand. Output ONLY the translation:\n\n${huText.slice(0,900)}`;
+  for (let attempt=0; attempt<3; attempt++) {
+    try {
+      const resp=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'x-api-key':apiKey, 'anthropic-version':'2023-06-01' },
+        body:JSON.stringify({ model:'claude-haiku-4-5-20251001', max_tokens:500, messages:[{role:'user',content:prompt}] })
+      });
+      if (resp.status===401) throw new Error('INVALID_KEY');
+      if (resp.status===429||resp.status===529){ await sleep(10000); continue; }
+      if (!resp.ok) throw new Error('HTTP_'+resp.status);
+      const data=await resp.json();
+      return data.content[0].text.trim();
+    } catch(e) {
+      if (e.message==='INVALID_KEY') throw e;
+      if (attempt===2) throw e;
+      await sleep(2000);
+    }
+  }
+  return null;
+}
+
+// ── Main loop ─────────────────────────────────────────
+async function startAll() {
+  if (!apiKey){ log('Save your API key first.','err'); return; }
+  if (typeof PRODUCTS==='undefined'){ log('products_data.js not found.','err'); return; }
+
+  running=true; stopFlag=false;
+  startTime=Date.now(); doneAtStart=countTotal();
+  document.getElementById('startBtn').disabled=true;
+  document.getElementById('stopBtn').disabled=false;
+  document.getElementById('ovStatus').textContent='Translating…';
+
+  const totalNeeded = GT - doneAtStart;
+  log(`Starting. ${totalNeeded} translations to do across 4 languages.`,'info');
+
+  for (const lang of LANGS) {
+    if (stopFlag) break;
+
+    const tasks=PRODUCTS.filter(p=>p.desc_hu&&p.desc_hu.trim()&&!(translations[lang.code][p.sku]&&translations[lang.code][p.sku].trim()));
+    if (!tasks.length){ log(`${lang.label}: already complete ✓`,'ok'); document.getElementById('lc-'+lang.code).classList.add('done'); continue; }
+
+    log(`── ${lang.label}: ${tasks.length} products ──`,'info');
+    document.getElementById('lc-'+lang.code).classList.add('active');
+
+    let saved=0;
+
+    // Run 4 at a time in parallel
+    const BATCH=4;
+    for (let i=0; i<tasks.length&&!stopFlag; i+=BATCH) {
+      const batch=tasks.slice(i,i+BATCH);
+
+      const results=await Promise.allSettled(
+        batch.map(p=>translateOne(p.desc_hu, lang.name))
+      );
+
+      for (let j=0; j<batch.length; j++) {
+        const p=batch[j];
+        const r=results[j];
+        if (r.status==='fulfilled'&&r.value) {
+          translations[lang.code][p.sku]=r.value;
+          saved++;
+          // Update UI after EVERY single translation
+          updateUI(`${p.title} → ${lang.label}`);
+          log(`[${lang.label}] ${countLang(lang.code)}/752 — ${p.title}`,'prod');
+        } else if (r.status==='rejected') {
+          if (r.reason?.message==='INVALID_KEY'){ log('❌ Invalid key','err'); stopFlag=true; break; }
+          log(`Skip ${p.sku}: ${r.reason?.message||'error'}`,'err');
+        }
+      }
+
+      // Save every 5 products
+      if (saved%5===0&&saved>0) localStorage.setItem(lang.store, JSON.stringify(translations[lang.code]));
+      await sleep(200);
+    }
+
+    localStorage.setItem(lang.store, JSON.stringify(translations[lang.code]));
+    const n=countLang(lang.code);
+    document.getElementById('lc-'+lang.code).classList.remove('active');
+    if (!stopFlag){ document.getElementById('lc-'+lang.code).classList.add('done'); log(`✅ ${lang.label} complete: ${n}/752`,'ok'); }
+    else log(`Paused at ${n}/752`,'info');
+  }
+
+  const grand=updateUI();
+  if (!stopFlag&&grand===GT){ log('','dim'); log('✅ ALL DONE — click Download!','ok'); document.getElementById('dlBtn').disabled=false; }
+  else if (stopFlag) log('Paused. Click Start to resume.','info');
+  running=false; document.getElementById('startBtn').disabled=false; document.getElementById('stopBtn').disabled=true;
+}
+
+function stopAll(){ stopFlag=true; log('Pausing…','info'); document.getElementById('stopBtn').disabled=true; }
+
+// ── Download ──────────────────────────────────────────
+function downloadResult() {
+  if (typeof PRODUCTS==='undefined'){ log('products_data.js not loaded.','err'); return; }
+  log('Building products_data.js…','info');
+  const merged=PRODUCTS.map(p=>{ const r={...p}; LANGS.forEach(l=>{ r[l.field]=(translations[l.code]&&translations[l.code][p.sku])||p[l.field]||''; }); return r; });
+  const js='const PRODUCTS = '+JSON.stringify(merged)+';';
+  const blob=new Blob([js],{type:'text/javascript;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='products_data.js';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  LANGS.forEach(l=>{ const n=countLang(l.code); log(`  ${l.label}: ${n}/752`,n===TOTAL?'ok':'info'); });
+  log('✅ Downloaded! Replace your existing products_data.js.','ok');
+}
+
+function log(msg,cls='') { const el=document.getElementById('log'); if(!msg){el.appendChild(document.createElement('br'));return;} const d=document.createElement('div'); if(cls)d.className=cls; d.textContent=new Date().toLocaleTimeString('en-GB')+'  '+msg; el.appendChild(d); el.scrollTop=el.scrollHeight; }
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlinger Haus — Premium Kitchenware</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM — Luxury Editorial Dark
+   Inspired by: Vogue, Williams-Sonoma, Maison Berger
+   Fonts: Cinzel (headlines) + EB Garamond (body) + Raleway (UI)
+   ═══════════════════════════════════════════ */
+:root {
+  --void: #030303;
+  --onyx: #0b0b0b;
+  --obsidian: #111111;
+  --graphite: #1c1c1c;
+  --charcoal: #282828;
+  --smoke: #3a3a3a;
+
+  --gold:    #c8a45a;
+  --gold-lt: #e0c07a;
+  --gold-dk: #8a6c30;
+  --gold-gl: rgba(200,164,90,.12);
+  --gold-gl2: rgba(200,164,90,.06);
+
+  --parchment: #f0ebe0;
+  --cream:     #e8e2d4;
+  --ivory:     #d4ccbb;
+  --mist:      #8a8070;
+  --fog:       #5a5448;
+  --shadow:    #2a2520;
+
+  --green: #2e6b4a;
+  --red:   #7a2418;
+
+  --sidebar-w: 272px;
+  --header-h:  72px;
+
+  --cinzel:   'Cinzel', serif;
+  --garamond: 'EB Garamond', serif;
+  --raleway:  'Raleway', sans-serif;
+  --tenor:    'Tenor Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--raleway);
+  background: var(--void);
+  color: var(--parchment);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--onyx); }
+::-webkit-scrollbar-thumb { background: var(--gold-dk); border-radius: 2px; }
+
+/* ─── GRAIN OVERLAY ─────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: .4;
+}
+
+/* ─── HEADER ─────────────────────────────── */
+header {
+  position: sticky; top: 0; z-index: 200;
+  height: var(--header-h);
+  background: rgba(3,3,3,.94);
+  border-bottom: 1px solid var(--shadow);
+  backdrop-filter: blur(20px) saturate(1.4);
+  display: flex; align-items: center; gap: 0;
+  padding: 0 28px;
+}
+
+.logo-wrap {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 0; flex-shrink: 0; margin-right: 32px;
+}
+.logo-main {
+  font-family: var(--cinzel);
+  font-size: 17px; font-weight: 500; letter-spacing: .22em;
+  color: var(--gold); text-decoration: none; text-transform: uppercase;
+  line-height: 1;
+}
+.logo-sub {
+  font-family: var(--garamond);
+  font-size: 10px; letter-spacing: .3em; color: var(--fog);
+  text-transform: uppercase; margin-top: 3px; font-style: italic;
+}
+
+/* Gold separator lines */
+.h-sep {
+  width: 1px; height: 32px; background: var(--shadow); margin: 0 24px; flex-shrink: 0;
+}
+
+.h-search {
+  display: flex; align-items: center; gap: 10px; flex: 1; max-width: 360px;
+  border-bottom: 1px solid var(--smoke);
+  padding-bottom: 6px; transition: border-color .3s;
+}
+.h-search:focus-within { border-color: var(--gold-dk); }
+.h-search svg { color: var(--fog); flex-shrink: 0; }
+.h-search input {
+  background: none; border: none; outline: none;
+  font-family: var(--raleway); font-size: 13px; font-weight: 300;
+  color: var(--parchment); flex: 1; letter-spacing: .06em;
+}
+.h-search input::placeholder { color: var(--fog); }
+
+.h-right { display: flex; align-items: center; gap: 16px; margin-left: auto; flex-shrink: 0; }
+
+.lang-btn {
+  background: none; border: 1px solid var(--smoke);
+  border-radius: 3px; color: var(--mist);
+  font-family: var(--raleway); font-size: 11px; font-weight: 500;
+  letter-spacing: .1em; padding: 6px 10px; cursor: pointer;
+  transition: all .2s;
+}
+.lang-btn:focus { outline: none; }
+.lang-btn:hover { border-color: var(--gold-dk); color: var(--gold); }
+
+.cart-btn {
+  display: flex; align-items: center; gap: 9px;
+  background: none; border: 1px solid var(--gold-dk);
+  color: var(--gold); font-family: var(--raleway);
+  font-size: 11px; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; padding: 9px 18px; cursor: pointer;
+  transition: all .25s; position: relative;
+}
+.cart-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold-gl2); opacity: 0; transition: opacity .25s;
+}
+.cart-btn:hover { border-color: var(--gold); color: var(--gold-lt); }
+.cart-btn:hover::before { opacity: 1; }
+.cart-n {
+  background: var(--gold); color: var(--void);
+  border-radius: 999px; font-size: 10px; font-weight: 700;
+  min-width: 17px; height: 17px; display: inline-flex;
+  align-items: center; justify-content: center; padding: 0 4px;
+}
+
+/* ─── LAYOUT ─────────────────────────────── */
+.app { display: flex; min-height: calc(100vh - var(--header-h)); }
+
+/* ─── SIDEBAR ─────────────────────────────── */
+aside {
+  width: var(--sidebar-w); flex-shrink: 0;
+  background: var(--onyx);
+  border-right: 1px solid var(--shadow);
+  position: sticky; top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+}
+.aside-top {
+  padding: 28px 24px 0;
+}
+.aside-ornament {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.aside-ornament::before, .aside-ornament::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--shadow));
+}
+.aside-ornament span {
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .25em;
+  color: var(--fog); text-transform: uppercase; white-space: nowrap;
+}
+
+.cat-all {
+  display: block; width: 100%;
+  font-family: var(--raleway); font-size: 12px; font-weight: 400;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--mist); padding: 8px 0; background: none;
+  border: none; text-align: left; cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: all .2s;
+}
+.cat-all:hover, .cat-all.active { color: var(--gold); border-bottom-color: var(--gold-dk); }
+
+.cat-group { margin-bottom: 2px; }
+.cat-main-btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  background: none; border: none; text-align: left; cursor: pointer;
+  font-family: var(--raleway); font-size: 12px; font-weight: 400;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--mist); padding: 9px 0;
+  transition: color .2s; border-bottom: 1px solid transparent;
+}
+.cat-main-btn:hover, .cat-main-btn.active { color: var(--gold); }
+.cat-main-btn.active { border-bottom-color: var(--gold-dk); }
+.cat-arrow { font-size: 8px; opacity: .5; transition: transform .2s; }
+.cat-main-btn.open .cat-arrow { transform: rotate(90deg); }
+
+.cat-subs { display: none; padding-left: 14px; }
+.cat-subs.open { display: block; }
+.cat-sub-btn {
+  display: block; width: 100%; background: none; border: none;
+  text-align: left; cursor: pointer;
+  font-family: var(--garamond); font-size: 14px; font-style: italic;
+  color: var(--fog); padding: 5px 0; transition: color .2s; letter-spacing: .03em;
+}
+.cat-sub-btn:hover, .cat-sub-btn.active { color: var(--gold); }
+
+/* Filter blocks */
+.aside-block { padding: 0 24px 20px; }
+.aside-divider {
+  height: 1px; background: var(--shadow); margin: 8px 24px 20px;
+}
+.aside-label {
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--fog); display: block; margin-bottom: 12px;
+}
+.price-inputs { display: flex; gap: 8px; align-items: center; }
+.price-inp {
+  flex: 1; background: none; border: none; border-bottom: 1px solid var(--smoke);
+  padding: 6px 0; font-family: var(--raleway); font-size: 13px; font-weight: 300;
+  color: var(--parchment); outline: none; transition: border-color .2s; width: 0;
+}
+.price-inp:focus { border-color: var(--gold-dk); }
+.price-inp::placeholder { color: var(--fog); }
+.price-sep { color: var(--fog); font-size: 13px; }
+.apply-btn {
+  width: 100%; margin-top: 12px;
+  background: none; border: 1px solid var(--gold-dk);
+  color: var(--gold); font-family: var(--cinzel);
+  font-size: 9px; font-weight: 400; letter-spacing: .2em;
+  text-transform: uppercase; padding: 9px;
+  cursor: pointer; transition: all .22s;
+}
+.apply-btn:hover { background: var(--gold-gl); }
+
+.stock-label {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--raleway); font-size: 12px; font-weight: 300;
+  color: var(--mist); cursor: pointer; letter-spacing: .05em;
+}
+.stock-label input { accent-color: var(--gold); width: 14px; height: 14px; }
+
+/* Active filter tags */
+.filter-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+.ftag {
+  display: flex; align-items: center; gap: 5px;
+  border: 1px solid var(--gold-dk); border-radius: 0;
+  padding: 3px 10px; font-family: var(--cinzel);
+  font-size: 8px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold);
+}
+.ftag button {
+  background: none; border: none; cursor: pointer; color: var(--gold-dk);
+  font-size: 12px; line-height: 1; padding: 0 0 0 3px; transition: color .15s;
+}
+.ftag button:hover { color: var(--gold); }
+
+/* ─── MAIN ─────────────────────────────────── */
+main { flex: 1; min-width: 0; padding: 28px 32px; }
+
+.main-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+}
+.result-count {
+  font-family: var(--garamond); font-size: 15px; font-style: italic;
+  color: var(--fog); letter-spacing: .03em;
+}
+.result-count strong { color: var(--parchment); font-style: normal; font-weight: 400; }
+
+.controls { display: flex; align-items: center; gap: 12px; }
+.sort-sel {
+  background: none; border: none; border-bottom: 1px solid var(--smoke);
+  color: var(--mist); font-family: var(--raleway);
+  font-size: 11px; font-weight: 400; letter-spacing: .08em;
+  padding: 4px 0; cursor: pointer; outline: none;
+  transition: border-color .2s;
+}
+.sort-sel:focus { border-color: var(--gold-dk); }
+.sort-sel option { background: var(--graphite); }
+
+.view-btns { display: flex; gap: 2px; }
+.vb {
+  background: none; border: 1px solid var(--shadow);
+  width: 30px; height: 30px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--fog); transition: all .2s;
+}
+.vb.on, .vb:hover { border-color: var(--gold-dk); color: var(--gold); background: var(--gold-gl2); }
+
+/* ─── PRODUCT GRID ─────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1px;
+  background: var(--shadow);
+  border: 1px solid var(--shadow);
+}
+.grid.lv {
+  grid-template-columns: 1fr;
+  gap: 1px;
+}
+
+.card {
+  background: var(--onyx);
+  cursor: pointer; position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: background .3s;
+}
+.card::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(135deg, rgba(200,164,90,.06) 0%, transparent 50%);
+  opacity: 0; transition: opacity .4s;
+}
+.card:hover { background: var(--obsidian); }
+.card:hover::after { opacity: 1; }
+
+/* Gold top accent bar */
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dk), transparent);
+  opacity: 0; transition: opacity .4s;
+}
+.card:hover::before { opacity: 1; }
+
+.card.lv { flex-direction: row; }
+
+.card-img {
+  position: relative; overflow: hidden;
+  background: var(--obsidian); aspect-ratio: 1; flex-shrink: 0;
+}
+.card.lv .card-img { width: 160px; aspect-ratio: unset; }
+
+.card-img img {
+  width: 100%; height: 100%; object-fit: contain;
+  padding: 16px; transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+.card:hover .card-img img { transform: scale(1.06); }
+
+.stock-pill {
+  position: absolute; bottom: 8px; left: 8px;
+  font-family: var(--cinzel); font-size: 7px; letter-spacing: .14em;
+  text-transform: uppercase; padding: 3px 8px;
+}
+.sp-in { color: #6fb893; border: 1px solid rgba(111,184,147,.3); background: rgba(46,107,74,.15); }
+.sp-out { color: var(--fog); border: 1px solid rgba(90,84,72,.3); background: rgba(42,37,32,.3); }
+
+.card-body { padding: 16px 18px 10px; flex: 1; }
+.card-collection {
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--gold-dk); margin-bottom: 7px;
+  display: block;
+}
+.card-title {
+  font-family: var(--garamond); font-size: 17px; font-weight: 400;
+  line-height: 1.35; color: var(--parchment); margin-bottom: 5px; letter-spacing: .01em;
+}
+.card-sku {
+  font-family: var(--raleway); font-size: 10px; font-weight: 300;
+  color: var(--fog); letter-spacing: .08em; margin-bottom: 12px;
+}
+.card-price {
+  font-family: var(--cinzel); font-size: 19px; font-weight: 400; color: var(--gold);
+  letter-spacing: .06em; display: flex; align-items: baseline; gap: 5px;
+}
+.card-price span {
+  font-family: var(--raleway); font-size: 10px; font-weight: 300;
+  color: var(--fog); letter-spacing: .08em;
+}
+
+.card-actions { padding: 0 18px 16px; display: flex; gap: 8px; }
+.btn-add {
+  flex: 1; background: none; border: 1px solid var(--gold-dk);
+  color: var(--gold); font-family: var(--cinzel);
+  font-size: 8px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  padding: 9px; cursor: pointer; transition: all .22s; position: relative; overflow: hidden;
+}
+.btn-add::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold-gl); opacity: 0; transition: opacity .22s;
+}
+.btn-add:hover::before { opacity: 1; }
+.btn-add:disabled { opacity: .28; cursor: not-allowed; }
+.btn-details {
+  background: none; border: 1px solid var(--smoke);
+  color: var(--fog); font-family: var(--cinzel);
+  font-size: 8px; letter-spacing: .14em; text-transform: uppercase;
+  padding: 9px 12px; cursor: pointer; transition: all .22s;
+}
+.btn-details:hover { border-color: var(--smoke); color: var(--mist); background: rgba(90,84,72,.1); }
+
+/* ─── PAGINATION ─────────────────────────── */
+.pages {
+  display: flex; align-items: center; justify-content: center;
+  gap: 2px; margin-top: 40px; padding-bottom: 60px;
+}
+.pg {
+  min-width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: 1px solid var(--shadow);
+  font-family: var(--cinzel); font-size: 11px; font-weight: 400;
+  letter-spacing: .1em; color: var(--fog); cursor: pointer;
+  transition: all .2s; padding: 0 10px;
+}
+.pg:hover { border-color: var(--smoke); color: var(--mist); }
+.pg.on { border-color: var(--gold-dk); color: var(--gold); background: var(--gold-gl2); }
+.pg:disabled { opacity: .25; pointer-events: none; }
+.pgdot { color: var(--smoke); padding: 0 6px; font-size: 11px; }
+
+/* ─── MODAL ─────────────────────────────── */
+.overlay {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(0,0,0,.88); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .35s;
+}
+.overlay.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: var(--onyx);
+  border: 1px solid var(--shadow);
+  max-width: 960px; width: 100%; max-height: 90vh;
+  display: flex; flex-direction: column;
+  transform: translateY(32px) scale(.97);
+  transition: transform .38s cubic-bezier(.25,.46,.45,.94);
+  box-shadow: 0 40px 120px rgba(0,0,0,.9), 0 0 0 1px rgba(200,164,90,.08);
+  overflow: hidden;
+}
+.overlay.open .modal { transform: translateY(0) scale(1); }
+
+.modal-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 26px;
+  background: linear-gradient(180deg, var(--obsidian), var(--onyx));
+  border-bottom: 1px solid var(--shadow); flex-shrink: 0;
+}
+.modal-hdr-left { display: flex; flex-direction: column; gap: 2px; }
+.modal-eyebrow {
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold-dk);
+}
+.modal-hdr h2 {
+  font-family: var(--garamond); font-size: 20px; font-weight: 400;
+  color: var(--parchment); letter-spacing: .01em;
+}
+.modal-close {
+  background: none; border: 1px solid var(--shadow);
+  color: var(--fog); width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 15px; transition: all .2s; flex-shrink: 0;
+}
+.modal-close:hover { border-color: var(--smoke); color: var(--mist); }
+
+.modal-body { display: flex; gap: 32px; padding: 28px; overflow-y: auto; flex: 1; }
+
+/* Gallery */
+.modal-gal { width: 360px; flex-shrink: 0; }
+.gal-main {
+  background: var(--obsidian); border: 1px solid var(--shadow);
+  aspect-ratio: 1; overflow: hidden; margin-bottom: 10px;
+}
+.gal-main img { width: 100%; height: 100%; object-fit: contain; padding: 20px; }
+.gal-thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+.gal-thumb {
+  width: 58px; height: 58px; background: var(--obsidian);
+  border: 1px solid var(--shadow); cursor: pointer; overflow: hidden;
+  transition: border-color .2s; flex-shrink: 0;
+}
+.gal-thumb.on { border-color: var(--gold); }
+.gal-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+
+/* Modal info */
+.modal-info { flex: 1; min-width: 0; }
+.m-collection {
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold-dk); margin-bottom: 8px; display: block;
+}
+.m-title {
+  font-family: var(--garamond); font-size: 30px; font-weight: 400;
+  line-height: 1.2; color: var(--parchment); margin-bottom: 6px; letter-spacing: .01em;
+}
+.m-sku {
+  font-family: var(--raleway); font-size: 10px; font-weight: 300;
+  color: var(--fog); letter-spacing: .1em; margin-bottom: 20px;
+}
+/* Gold rule */
+.m-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-dk), transparent);
+  margin-bottom: 20px;
+}
+.m-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+.m-price {
+  font-family: var(--cinzel); font-size: 30px; font-weight: 400;
+  color: var(--gold); letter-spacing: .06em;
+}
+.m-unit {
+  font-family: var(--raleway); font-size: 11px; font-weight: 300;
+  color: var(--fog); letter-spacing: .08em;
+}
+.m-stock-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .14em;
+  text-transform: uppercase; padding: 4px 11px; margin-bottom: 22px;
+}
+.m-stock-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.ms-in { color: #6fb893; border: 1px solid rgba(111,184,147,.28); background: rgba(46,107,74,.1); }
+.ms-out { color: var(--fog); border: 1px solid var(--shadow); background: rgba(40,36,32,.4); }
+
+.m-section { margin-bottom: 20px; }
+.m-sec-label {
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--fog); display: block; margin-bottom: 10px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--shadow);
+}
+.m-desc {
+  font-family: var(--garamond); font-size: 15px; line-height: 1.8;
+  color: rgba(240,235,224,.55); max-height: 130px; overflow-y: auto;
+  padding-right: 6px; letter-spacing: .01em;
+}
+.m-desc::-webkit-scrollbar { width: 3px; }
+.m-desc::-webkit-scrollbar-thumb { background: var(--gold-dk); }
+
+.m-spec-row {
+  display: flex; gap: 10px; padding: 7px 0;
+  border-bottom: 1px solid rgba(40,36,32,.8); font-size: 13px;
+}
+.m-spec-key {
+  width: 140px; flex-shrink: 0;
+  font-family: var(--raleway); font-size: 11px; font-weight: 300;
+  color: var(--fog); letter-spacing: .05em;
+}
+.m-spec-val {
+  font-family: var(--garamond); font-size: 14px;
+  color: var(--parchment); letter-spacing: .01em;
+}
+
+.m-actions { display: flex; gap: 10px; margin-top: 4px; }
+.m-btn-add {
+  flex: 1; background: none; border: 1px solid var(--gold-dk);
+  color: var(--gold); font-family: var(--cinzel);
+  font-size: 9px; font-weight: 400; letter-spacing: .2em;
+  text-transform: uppercase; padding: 14px;
+  cursor: pointer; transition: all .25s; position: relative; overflow: hidden;
+}
+.m-btn-add::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold-gl); opacity: 0; transition: opacity .25s;
+}
+.m-btn-add:hover::before { opacity: 1; }
+.m-btn-add:disabled { opacity: .25; cursor: not-allowed; }
+.m-btn-yt {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: 1px solid var(--shadow);
+  color: var(--fog); font-family: var(--cinzel);
+  font-size: 8px; letter-spacing: .14em; text-transform: uppercase;
+  padding: 14px 16px; cursor: pointer; transition: all .22s;
+  text-decoration: none;
+}
+.m-btn-yt:hover { border-color: rgba(220,80,80,.4); color: #e07070; }
+
+/* ─── CART PANEL ─────────────────────────── */
+.cart-panel {
+  position: fixed; right: 0; top: 0; bottom: 0;
+  width: 400px; background: var(--onyx);
+  border-left: 1px solid var(--shadow);
+  z-index: 500; display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+.cart-panel.open { transform: translateX(0); }
+
+.cart-hdr {
+  padding: 22px 24px; border-bottom: 1px solid var(--shadow);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.cart-hdr-left { display: flex; flex-direction: column; gap: 2px; }
+.cart-eyebrow {
+  font-family: var(--cinzel); font-size: 7px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--fog);
+}
+.cart-hdr h3 {
+  font-family: var(--garamond); font-size: 22px; font-weight: 400; color: var(--parchment);
+}
+
+.cart-items { flex: 1; overflow-y: auto; padding: 14px 24px; }
+.cart-item {
+  display: flex; gap: 14px; padding: 14px 0;
+  border-bottom: 1px solid var(--shadow);
+}
+.ci-img {
+  width: 68px; height: 68px; background: var(--obsidian);
+  border: 1px solid var(--shadow); flex-shrink: 0; overflow: hidden;
+}
+.ci-img img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+.ci-info { flex: 1; min-width: 0; }
+.ci-name {
+  font-family: var(--garamond); font-size: 14px; color: var(--parchment);
+  margin-bottom: 3px; line-height: 1.35;
+}
+.ci-sku {
+  font-family: var(--raleway); font-size: 10px; font-weight: 300;
+  color: var(--fog); letter-spacing: .06em; margin-bottom: 9px;
+}
+.ci-row { display: flex; align-items: center; justify-content: space-between; }
+.qty-ctrl { display: flex; align-items: center; gap: 10px; }
+.qty-btn {
+  background: none; border: 1px solid var(--shadow);
+  color: var(--mist); width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px; transition: all .15s;
+}
+.qty-btn:hover { border-color: var(--gold-dk); color: var(--gold); }
+.qty-n {
+  font-family: var(--cinzel); font-size: 13px; color: var(--parchment);
+  min-width: 18px; text-align: center;
+}
+.ci-price {
+  font-family: var(--cinzel); font-size: 15px;
+  color: var(--gold); letter-spacing: .06em;
+}
+.ci-rm {
+  background: none; border: none; color: var(--fog);
+  cursor: pointer; font-size: 16px; padding: 4px; transition: color .15s; flex-shrink: 0;
+}
+.ci-rm:hover { color: #d06060; }
+
+.cart-foot { padding: 20px 24px; border-top: 1px solid var(--shadow); flex-shrink: 0; }
+.cart-total-row {
+  display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;
+}
+.cart-total-lbl {
+  font-family: var(--cinzel); font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--fog);
+}
+.cart-total-price {
+  font-family: var(--cinzel); font-size: 24px; color: var(--gold); letter-spacing: .08em;
+}
+.checkout-btn {
+  width: 100%; background: none; border: 1px solid var(--gold-dk);
+  color: var(--gold); font-family: var(--cinzel);
+  font-size: 10px; font-weight: 400; letter-spacing: .22em;
+  text-transform: uppercase; padding: 15px;
+  cursor: pointer; transition: all .25s; position: relative; overflow: hidden;
+}
+.checkout-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold-gl); opacity: 0; transition: opacity .25s;
+}
+.checkout-btn:hover::before { opacity: 1; }
+.cart-empty {
+  text-align: center; padding: 60px 0; color: var(--fog);
+  font-family: var(--garamond); font-size: 16px; font-style: italic; line-height: 2.4;
+}
+.cart-empty-ornament {
+  font-family: var(--cinzel); font-size: 24px; color: var(--shadow);
+  display: block; margin-bottom: 14px; letter-spacing: .2em;
+}
+
+/* ─── OVERLAY BG ─────────────────────────── */
+.scrim {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,.7);
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+}
+.scrim.open { opacity: 1; pointer-events: all; }
+
+/* ─── EMPTY STATE ─────────────────────────── */
+.empty-state {
+  text-align: center; padding: 100px 0; grid-column: 1/-1;
+}
+.empty-state .e-icon {
+  font-family: var(--cinzel); font-size: 32px; letter-spacing: .3em;
+  color: var(--shadow); display: block; margin-bottom: 18px;
+}
+.empty-state h3 {
+  font-family: var(--garamond); font-size: 22px; font-weight: 400;
+  font-style: italic; color: var(--mist); margin-bottom: 8px;
+}
+.empty-state p {
+  font-family: var(--raleway); font-size: 12px; font-weight: 300;
+  color: var(--fog); letter-spacing: .06em;
+}
+
+/* ─── TOAST ─────────────────────────────── */
+.toast {
+  position: fixed; bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--obsidian); border: 1px solid var(--gold-dk);
+  color: var(--parchment);
+  font-family: var(--raleway); font-size: 12px; font-weight: 300;
+  letter-spacing: .06em; padding: 12px 24px;
+  box-shadow: 0 12px 48px rgba(0,0,0,.7);
+  opacity: 0; transition: all .35s; pointer-events: none; z-index: 999;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media (max-width: 1000px) {
+  aside { display: none; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  main { padding: 20px 16px; }
+}
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; gap: 0; }
+  .modal-body { flex-direction: column; }
+  .modal-gal { width: 100%; }
+  .cart-panel { width: 100%; }
+  .h-search { max-width: 140px; }
+}
+
+/* ═══════════════════════════════════════════
+   CHECKOUT OVERLAY — 3-step process
+   ═══════════════════════════════════════════ */
+
+.checkout-overlay {
+  position: fixed; inset: 0; z-index: 600;
+  background: rgba(0,0,0,.92);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s;
+}
+.checkout-overlay.open { opacity: 1; pointer-events: all; }
+
+.checkout-modal {
+  background: var(--onyx);
+  border: 1px solid var(--shadow);
+  width: 100%; max-width: 680px;
+  max-height: 92vh;
+  display: flex; flex-direction: column;
+  transform: translateY(28px);
+  transition: transform .38s cubic-bezier(.25,.46,.45,.94);
+  box-shadow: 0 40px 120px rgba(0,0,0,.9), 0 0 0 1px rgba(200,164,90,.07);
+  overflow: hidden;
+}
+.checkout-overlay.open .checkout-modal { transform: translateY(0); }
+
+/* Step header */
+.co-header {
+  padding: 20px 28px 0;
+  border-bottom: 1px solid var(--shadow);
+  flex-shrink: 0;
+}
+.co-steps {
+  display: flex; gap: 0; margin-bottom: 20px;
+}
+.co-step {
+  flex: 1; text-align: center; position: relative;
+  padding-bottom: 14px;
+}
+.co-step::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--shadow);
+  transition: background .3s;
+}
+.co-step.active::after { background: var(--gold); }
+.co-step.done::after { background: var(--gold-dk); }
+.co-step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid var(--smoke);
+  font-family: var(--cinzel); font-size: 10px; color: var(--fog);
+  margin-bottom: 5px; transition: all .3s;
+}
+.co-step.active .co-step-num {
+  border-color: var(--gold); color: var(--gold);
+  background: var(--gold-gl);
+}
+.co-step.done .co-step-num {
+  border-color: var(--gold-dk); background: var(--gold-dk); color: var(--void);
+}
+.co-step-label {
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--fog); display: block;
+  transition: color .3s;
+}
+.co-step.active .co-step-label { color: var(--gold); }
+
+/* Body */
+.co-body {
+  flex: 1; overflow-y: auto; padding: 24px 28px;
+}
+.co-body::-webkit-scrollbar { width: 3px; }
+.co-body::-webkit-scrollbar-thumb { background: var(--gold-dk); }
+
+/* Step panels */
+.co-panel { display: none; }
+.co-panel.active { display: block; }
+
+/* ── STEP 1: Order Review ── */
+.co-review-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 0; border-bottom: 1px solid var(--shadow);
+}
+.co-ri-img {
+  width: 54px; height: 54px; background: var(--obsidian);
+  border: 1px solid var(--shadow); flex-shrink: 0; overflow: hidden;
+}
+.co-ri-img img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+.co-ri-info { flex: 1; min-width: 0; }
+.co-ri-title {
+  font-family: var(--garamond); font-size: 14px; color: var(--parchment);
+  margin-bottom: 2px; line-height: 1.3;
+}
+.co-ri-sku {
+  font-family: var(--raleway); font-size: 10px; font-weight: 300;
+  color: var(--fog); letter-spacing: .06em;
+}
+.co-ri-qty {
+  font-family: var(--cinzel); font-size: 12px; color: var(--mist);
+  margin-left: 6px;
+}
+.co-ri-price {
+  font-family: var(--cinzel); font-size: 15px; color: var(--gold);
+  letter-spacing: .05em; flex-shrink: 0;
+}
+.co-total-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 16px 0 0; margin-top: 8px;
+}
+.co-total-lbl {
+  font-family: var(--cinzel); font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--fog);
+}
+.co-total-price {
+  font-family: var(--cinzel); font-size: 26px; color: var(--gold);
+  letter-spacing: .06em;
+}
+
+/* ── STEP 2: Customer Details ── */
+.co-type-toggle {
+  display: flex; gap: 0; margin-bottom: 22px;
+  border: 1px solid var(--shadow);
+}
+.co-type-btn {
+  flex: 1; padding: 10px; background: none; border: none;
+  font-family: var(--cinzel); font-size: 9px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--fog); cursor: pointer;
+  transition: all .22s;
+}
+.co-type-btn.active {
+  background: var(--gold-gl); color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+.co-form-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.co-form-grid.single { grid-template-columns: 1fr; }
+.co-field { display: flex; flex-direction: column; gap: 6px; }
+.co-field.full { grid-column: 1 / -1; }
+.co-label {
+  font-family: var(--cinzel); font-size: 8px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--fog);
+}
+.co-input {
+  background: none; border: none; border-bottom: 1px solid var(--smoke);
+  padding: 8px 0; font-family: var(--raleway); font-size: 14px;
+  font-weight: 300; color: var(--parchment); outline: none;
+  transition: border-color .2s; letter-spacing: .02em;
+}
+.co-input:focus { border-color: var(--gold-dk); }
+.co-input::placeholder { color: var(--fog); font-size: 13px; }
+.co-input.error { border-color: #c04040; }
+
+.co-notes-field {
+  resize: none; height: 80px; font-family: var(--raleway);
+  font-size: 13px; font-weight: 300; color: var(--parchment);
+  background: rgba(255,255,255,.03); border: 1px solid var(--smoke);
+  padding: 10px 12px; outline: none; width: 100%;
+  transition: border-color .2s; letter-spacing: .02em;
+}
+.co-notes-field:focus { border-color: var(--gold-dk); }
+.co-notes-field::placeholder { color: var(--fog); }
+
+.co-b2b-section { display: none; }
+.co-b2b-section.visible { display: contents; }
+
+.co-section-title {
+  font-family: var(--cinzel); font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold-dk);
+  grid-column: 1 / -1; padding-top: 8px;
+  border-top: 1px solid var(--shadow); margin-top: 4px;
+}
+
+/* ── STEP 3: Payment ── */
+.co-payment-methods {
+  display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px;
+}
+.co-pm {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border: 1px solid var(--shadow);
+  cursor: pointer; transition: border-color .2s;
+  position: relative;
+}
+.co-pm.selected { border-color: var(--gold-dk); background: var(--gold-gl2); }
+.co-pm input[type=radio] { accent-color: var(--gold); width: 15px; height: 15px; }
+.co-pm-icon {
+  font-size: 20px; width: 36px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.06); border-radius: 3px;
+}
+.co-pm-label {
+  font-family: var(--raleway); font-size: 13px; font-weight: 400; color: var(--parchment);
+}
+.co-pm-sub {
+  font-family: var(--raleway); font-size: 11px; font-weight: 300; color: var(--fog);
+  margin-left: auto; letter-spacing: .03em;
+}
+
+.co-order-summary {
+  background: var(--obsidian); border: 1px solid var(--shadow);
+  padding: 16px; margin-bottom: 20px;
+}
+.co-sum-row {
+  display: flex; justify-content: space-between;
+  font-family: var(--raleway); font-size: 13px; font-weight: 300;
+  color: var(--mist); padding: 4px 0;
+}
+.co-sum-row.total {
+  border-top: 1px solid var(--shadow); margin-top: 8px; padding-top: 12px;
+  font-family: var(--cinzel); font-size: 14px; color: var(--gold);
+  letter-spacing: .06em;
+}
+
+.co-terms {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-family: var(--raleway); font-size: 12px; font-weight: 300;
+  color: var(--fog); margin-bottom: 6px; line-height: 1.5;
+}
+.co-terms input { accent-color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+
+/* Footer */
+.co-footer {
+  padding: 16px 28px 20px;
+  border-top: 1px solid var(--shadow);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0; background: var(--obsidian);
+}
+.co-back {
+  background: none; border: none; color: var(--fog);
+  font-family: var(--cinzel); font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; cursor: pointer; transition: color .2s;
+  padding: 0;
+}
+.co-back:hover { color: var(--mist); }
+.co-next {
+  background: none; border: 1px solid var(--gold-dk);
+  color: var(--gold); font-family: var(--cinzel);
+  font-size: 9px; font-weight: 400; letter-spacing: .2em;
+  text-transform: uppercase; padding: 12px 28px;
+  cursor: pointer; transition: all .22s; position: relative; overflow: hidden;
+}
+.co-next::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold-gl); opacity: 0; transition: opacity .22s;
+}
+.co-next:hover::before { opacity: 1; }
+.co-next:disabled { opacity: .3; cursor: not-allowed; }
+.co-next.pay {
+  background: linear-gradient(135deg, #c8a45a 0%, #8a6c30 100%);
+  border-color: transparent; color: var(--void);
+  font-size: 10px; padding: 13px 32px;
+}
+.co-next.pay::before { display: none; }
+.co-next.pay:hover { opacity: .88; }
+
+/* Success screen */
+.co-success {
+  text-align: center; padding: 40px 20px;
+}
+.co-success-icon {
+  font-size: 48px; display: block; margin-bottom: 16px; letter-spacing: .2em;
+  color: var(--gold-dk);
+  font-family: var(--cinzel);
+}
+.co-success h2 {
+  font-family: var(--garamond); font-size: 28px; font-weight: 400;
+  color: var(--parchment); margin-bottom: 10px;
+}
+.co-success p {
+  font-family: var(--raleway); font-size: 14px; font-weight: 300;
+  color: var(--mist); line-height: 1.7; max-width: 420px; margin: 0 auto 6px;
+}
+.co-order-ref {
+  font-family: var(--cinzel); font-size: 13px; color: var(--gold);
+  letter-spacing: .12em; margin: 16px 0;
+}
+.co-success-close {
+  margin-top: 24px; background: none; border: 1px solid var(--gold-dk);
+  color: var(--gold); font-family: var(--cinzel);
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  padding: 12px 32px; cursor: pointer; transition: all .22s;
+}
+.co-success-close:hover { background: var(--gold-gl); }
+
+/* Spinner */
+.co-spinner {
+  display: inline-block; width: 18px; height: 18px;
+  border: 2px solid rgba(200,164,90,.3); border-top-color: var(--gold);
+  border-radius: 50%; animation: spin .7s linear infinite;
+  vertical-align: middle; margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Mollie card fields */
+#mollie-card-holder, #mollie-card-number, #mollie-card-expiry, #mollie-card-cvc {
+  border-bottom: 1px solid var(--smoke); padding: 8px 0; margin-top: 6px;
+  height: 36px; transition: border-color .2s;
+}
+.co-card-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;
+}
+.co-card-full { grid-column: 1 / -1; }
+
+@media (max-width: 640px) {
+  .co-form-grid { grid-template-columns: 1fr; }
+  .co-card-grid { grid-template-columns: 1fr; }
+  .checkout-modal { max-height: 98vh; }
+  .co-header { padding: 16px 18px 0; }
+  .co-body { padding: 18px; }
+  .co-footer { padding: 14px 18px 16px; }
+}
+
+</style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");</script>
+</head>
+<body>
+
+<!-- ─── HEADER ──────────────────────────── -->
+<header>
+  <div class="logo-wrap">
+    <a class="logo-main" href="#">Berlinger Haus</a>
+    <span class="logo-sub">Premium Kitchenware</span>
+  </div>
+  <div class="h-sep"></div>
+  <div class="h-search">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="SI" placeholder="Search collection…">
+  </div>
+  <div class="h-right">
+    <select class="lang-btn" id="LS" onchange="setLang(this.value)">
+      <option value="en">🇬🇧 EN</option>
+      <option value="nl">🇳🇱 NL</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="fr">🇫🇷 FR</option>
+    </select>
+    <button class="cart-btn" onclick="toggleCart()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span id="CLbl">Selection</span>
+      <span class="cart-n" id="CC">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ─── SCRIM + CART ────────────────────── -->
+<div class="scrim" id="SCRIM" onclick="closeCart()"></div>
+
+<div class="cart-panel" id="CP">
+  <div class="cart-hdr">
+    <div class="cart-hdr-left">
+      <span class="cart-eyebrow">Your</span>
+      <h3 id="CTitle">Selection</h3>
+    </div>
+    <button class="modal-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="CI"></div>
+  <div class="cart-foot" id="CF"></div>
+</div>
+
+<!-- ─── APP ────────────────────────────── -->
+<div class="app">
+  <aside>
+    <div class="aside-top">
+      <div class="aside-ornament"><span>Collections</span></div>
+      <button class="cat-all" id="CatAll" onclick="selCat(null,null)">All Products</button>
+      <div id="CL"></div>
+    </div>
+
+    <div class="aside-divider"></div>
+
+    <div class="aside-block">
+      <span class="aside-label">Price Range — EUR</span>
+      <div class="price-inputs">
+        <input type="number" class="price-inp" id="PM" placeholder="Min" min="0">
+        <span class="price-sep">—</span>
+        <input type="number" class="price-inp" id="PX" placeholder="Max" min="0">
+      </div>
+      <button class="apply-btn" id="AFBtn" onclick="applyFilters()">Apply Range</button>
+    </div>
+
+    <div class="aside-divider"></div>
+
+    <div class="aside-block">
+      <label class="stock-label">
+        <input type="checkbox" id="IS" onchange="applyFilters()">
+        <span id="ISLabel">In stock only</span>
+      </label>
+    </div>
+  </aside>
+
+  <main>
+    <div class="filter-tags" id="AT"></div>
+    <div class="main-top">
+      <p class="result-count" id="RI">Loading…</p>
+      <div class="controls">
+        <select class="sort-sel" id="SS" onchange="applyFilters()">
+          <option value="default">Default</option>
+          <option value="price-asc">Price ↑</option>
+          <option value="price-desc">Price ↓</option>
+          <option value="az">A → Z</option>
+          <option value="za">Z → A</option>
+        </select>
+        <div class="view-btns">
+          <button class="vb on" id="GB" onclick="setView('g')" title="Grid">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect width="4" height="4" rx=".5"/><rect x="8" width="4" height="4" rx=".5"/><rect y="8" width="4" height="4" rx=".5"/><rect x="8" y="8" width="4" height="4" rx=".5"/></svg>
+          </button>
+          <button class="vb" id="LB" onclick="setView('l')" title="List">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="4" y1="2.5" x2="12" y2="2.5"/><line x1="4" y1="6" x2="12" y2="6"/><line x1="4" y1="9.5" x2="12" y2="9.5"/><circle cx="1.2" cy="2.5" r=".9" fill="currentColor" stroke="none"/><circle cx="1.2" cy="6" r=".9" fill="currentColor" stroke="none"/><circle cx="1.2" cy="9.5" r=".9" fill="currentColor" stroke="none"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="grid" id="PG"></div>
+    <div class="pages" id="PAG"></div>
+  </main>
+</div>
+
+<!-- ─── MODAL ──────────────────────────── -->
+<div class="overlay" id="MO" onclick="cMO(event)">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-hdr-left">
+        <span class="modal-eyebrow" id="MEyebrow">Product Detail</span>
+        <h2 id="MT"></h2>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="MB"></div>
+  </div>
+</div>
+
+<div class="toast" id="TT"></div>
+
+<!-- ─── DATA + LOGIC ──────────────────── -->
+<script src="products_data.js"></script>
+<script>
+/* ══ CATEGORY TRANSLATIONS ═══════════════════════════════ */
+const CT={
+"Főzés":{en:"Cooking",nl:"Koken",de:"Kochen",fr:"Cuisson"},
+"Gépek":{en:"Appliances",nl:"Apparaten",de:"Geräte",fr:"Appareils"},
+"Háztartás":{en:"Household",nl:"Huishouden",de:"Haushalt",fr:"Ménage"},
+"Kiegészítők":{en:"Accessories",nl:"Accessoires",de:"Zubehör",fr:"Accessoires"},
+"Kávé&Tea":{en:"Coffee & Tea",nl:"Koffie & Thee",de:"Kaffee & Tee",fr:"Café & Thé"},
+"Kések":{en:"Knives",nl:"Messen",de:"Messer",fr:"Couteaux"},
+"Készletek":{en:"Sets",nl:"Sets",de:"Sets",fr:"Ensembles"},
+"Sütés&Grill":{en:"Baking & Grill",nl:"Bakken & Grill",de:"Backen & Grill",fr:"Cuisson & Grill"},
+"Szószos edények":{en:"Sauce Pans",nl:"Steelpannen",de:"Stieltöpfe",fr:"Casseroles"},
+"Serpenyők":{en:"Frying Pans",nl:"Koekenpannen",de:"Pfannen",fr:"Poêles"},
+"Palacsintasütők":{en:"Crêpe Pans",nl:"Pannenkoekenpannen",de:"Crêpepfannen",fr:"Poêles à crêpes"},
+"Különleges serpenyők":{en:"Special Pans",nl:"Speciale pannen",de:"Spezialpfannen",fr:"Poêles spéciales"},
+"Lábasok":{en:"Casseroles",nl:"Kookpotten",de:"Kochtöpfe",fr:"Faitouts"},
+"Fazekak":{en:"Pots",nl:"Potten",de:"Töpfe",fr:"Marmites"},
+"Kukták":{en:"Pressure Cookers",nl:"Snelkookpannen",de:"Schnellkochtöpfe",fr:"Autocuiseurs"},
+"Öntöttvas":{en:"Cast Iron",nl:"Gietijzer",de:"Gusseisen",fr:"Fonte"},
+"AirFryer-ek":{en:"Air Fryers",nl:"Airfryers",de:"Heißluftfritteusen",fr:"Friteuses à air"},
+"Botmixerek":{en:"Hand Blenders",nl:"Staafmixers",de:"Stabmixer",fr:"Mixeurs plongeants"},
+"Digitális főzőedények":{en:"Digital Cookers",nl:"Digitale kookpotten",de:"Digitale Kocher",fr:"Cuiseurs digitaux"},
+"Gyümölcsfacsarók":{en:"Juicers",nl:"Sapcentrifuges",de:"Entsafter",fr:"Presse-agrumes"},
+"Kenyérpirítók":{en:"Toasters",nl:"Broodroosters",de:"Toaster",fr:"Grille-pains"},
+"Konyhai robotgépek":{en:"Food Processors",nl:"Keukenmachines",de:"Küchenmaschinen",fr:"Robots de cuisine"},
+"Kézimixerek":{en:"Hand Mixers",nl:"Handmixers",de:"Handmixer",fr:"Batteurs à main"},
+"Mikrohullámú sütők":{en:"Microwaves",nl:"Magnetrons",de:"Mikrowellen",fr:"Micro-ondes"},
+"Rizsfőzők":{en:"Rice Cookers",nl:"Rijstkokers",de:"Reiskocher",fr:"Cuiseurs à riz"},
+"Szendvicssütők":{en:"Sandwich Makers",nl:"Tosti-apparaten",de:"Sandwichmaker",fr:"Croque-monsieurs"},
+"Szódagépek":{en:"Soda Makers",nl:"Sodamakers",de:"Wassersprudler",fr:"Machines à soda"},
+"Porszívók":{en:"Vacuum Cleaners",nl:"Stofzuigers",de:"Staubsauger",fr:"Aspirateurs"},
+"Szemetesládák":{en:"Waste Bins",nl:"Prullenbakken",de:"Mülleimer",fr:"Poubelles"},
+"Személymérlegek":{en:"Bathroom Scales",nl:"Personenweegschalen",de:"Personenwaagen",fr:"Pèse-personnes"},
+"Vasalók":{en:"Irons",nl:"Strijkijzers",de:"Bügeleisen",fr:"Fers à repasser"},
+"Edényszárítók":{en:"Dish Racks",nl:"Afdruiprekken",de:"Abtropfgestelle",fr:"Égouttoirs"},
+"Fűszertartók":{en:"Spice Holders",nl:"Kruidenrekken",de:"Gewürzhalter",fr:"Porte-épices"},
+"Italozás":{en:"Drinkware",nl:"Drinkgerei",de:"Trinkgeschirr",fr:"Verrerie"},
+"Kenyértárolók":{en:"Bread Bins",nl:"Brooddozen",de:"Brotdosen",fr:"Boîtes à pain"},
+"Konyhai eszközök":{en:"Kitchen Tools",nl:"Keukengereedschap",de:"Küchenhelfer",fr:"Ustensiles"},
+"Konyhai mérlegek":{en:"Kitchen Scales",nl:"Keukenweegschalen",de:"Küchenwaagen",fr:"Balances de cuisine"},
+"Papírtörlő tartók":{en:"Paper Towel Holders",nl:"Keukenpapierhouders",de:"Papierrollenhalter",fr:"Porte-essuie-tout"},
+"Szalvétatartók":{en:"Napkin Holders",nl:"Servethouders",de:"Serviettenhalter",fr:"Porte-serviettes"},
+"Só- és Borsörlők":{en:"Salt & Pepper Mills",nl:"Zout- en pepermolens",de:"Salz- und Pfeffermühlen",fr:"Moulins sel & poivre"},
+"Tárolók":{en:"Storage",nl:"Opbergdozen",de:"Aufbewahrung",fr:"Rangement"},
+"Dugattyús teafőzők":{en:"French Press",nl:"Cafetières",de:"Französische Pressen",fr:"Cafetières à piston"},
+"Kávéfőzők":{en:"Coffee Makers",nl:"Koffiezetapparaten",de:"Kaffeemaschinen",fr:"Cafetières"},
+"Tejforralók":{en:"Milk Heaters",nl:"Melkverwarmer",de:"Milchwärmer",fr:"Chauffe-lait"},
+"Tejhabosítók":{en:"Milk Frothers",nl:"Melkopschuimers",de:"Milchaufschäumer",fr:"Mousseurs à lait"},
+"Termoszok":{en:"Thermoses",nl:"Thermosflessen",de:"Thermosflaschen",fr:"Thermos"},
+"Teáskannák":{en:"Teapots",nl:"Theepotten",de:"Teekannen",fr:"Théières"},
+"Vízforralók":{en:"Kettles",nl:"Waterkokers",de:"Wasserkocher",fr:"Bouilloires"},
+"Hámozó kések":{en:"Peeling Knives",nl:"Dunschillers",de:"Schälmesser",fr:"Couteaux à éplucher"},
+"Kenyérvágó kések":{en:"Bread Knives",nl:"Broodmessen",de:"Brotmesser",fr:"Couteaux à pain"},
+"Kés készletek":{en:"Knife Sets",nl:"Messensets",de:"Messersets",fr:"Sets de couteaux"},
+"Kés készletek akasztóval":{en:"Knife Sets with Rack",nl:"Messensets met rek",de:"Messersets mit Halter",fr:"Sets couteaux support"},
+"Kés készletek vágódeszkával":{en:"Knife Sets with Board",nl:"Messensets met snijplank",de:"Messersets met Brett",fr:"Sets couteaux planche"},
+"Kés készletek állvánnyal":{en:"Knife Sets with Block",nl:"Messensets met blok",de:"Messersets met Block",fr:"Sets couteaux bloc"},
+"Santoku kések":{en:"Santoku Knives",nl:"Santokumessen",de:"Santokumesser",fr:"Couteaux santoku"},
+"Szeletelő kések":{en:"Slicing Knives",nl:"Snijmessen",de:"Schneidemesser",fr:"Couteaux à trancher"},
+"Séf kések":{en:"Chef Knives",nl:"Kooksmessen",de:"Kochmesser",fr:"Couteaux de chef"},
+"Általános kések":{en:"General Knives",nl:"Algemene messen",de:"Allgemeine Messer",fr:"Couteaux généraux"},
+"Edény készletek":{en:"Cookware Sets",nl:"Pannensets",de:"Kochgeschirrsets",fr:"Sets casseroles"},
+"Evőeszköz készletek":{en:"Cutlery Sets",nl:"Besteksets",de:"Bestecksets",fr:"Sets de couverts"},
+"Kerámia":{en:"Ceramic",nl:"Keramiek",de:"Keramik",fr:"Céramique"},
+"Konyhai eszköz készletek":{en:"Kitchen Tool Sets",nl:"Keukengerei sets",de:"Küchenhelfer-Sets",fr:"Sets ustensiles"},
+"Sütő készletek":{en:"Baking Sets",nl:"Baksets",de:"Backsets",fr:"Sets de cuisson"},
+"Elektromos grill":{en:"Electric Grill",nl:"Elektrische grill",de:"Elektrischer Grill",fr:"Grill électrique"},
+"Pizzasütők":{en:"Pizza Makers",nl:"Pizzamakers",de:"Pizzamaker",fr:"Fours à pizza"},
+"Sütő formák":{en:"Baking Moulds",nl:"Bakvormen",de:"Backformen",fr:"Moules"},
+"Sütőlapok":{en:"Baking Sheets",nl:"Bakplaten",de:"Backbleche",fr:"Plaques cuisson"},
+"Tepsik":{en:"Roasting Pans",nl:"Braadsleden",de:"Bratpfannen",fr:"Plats à rôtir"},
+"Tepsik fedővel":{en:"Roasting Pans with Lid",nl:"Braadslede met deksel",de:"Bratpfannen mit Deckel",fr:"Plats à rôtir couvercle"},
+"Salátakészítők":{en:"Salad Spinners",nl:"Slacentrifuges",de:"Salatschleudern",fr:"Essoreuses à salade"}
+};
+
+/* ══ UI TRANSLATIONS ════════════════════════════════════ */
+const TX={
+en:{all:"All Products",cart:"Selection",myCart:"Your Selection",price:"Price — EUR",apply:"Apply Range",stock:"In stock only",in:"In Stock",out:"Out of Stock",add:"Add to Selection",det:"View Details",spc:"Specifications",dsc:"Description",mat:"Material",col:"Colour",dia:"Diameter",siz:"Size",vol:"Capacity",pwr:"Power",ind:"Induction",sku:"Reference",cat:"Category",unt:"EUR / unit · net",vid:"Watch Film",add2:"added to selection",emp:"Your selection is empty",tot:"Total — net",ord:"Proceed to Order",nop:"No pieces found",nos:"Refine your search",prv:"← Previous",nxt:"Next →",res:"pieces found"},
+nl:{all:"Alle producten",cart:"Selectie",myCart:"Uw selectie",price:"Prijs — EUR",apply:"Toepassen",stock:"Alleen op voorraad",in:"Op voorraad",out:"Niet op voorraad",add:"Toevoegen",det:"Details",spc:"Specificaties",dsc:"Beschrijving",mat:"Materiaal",col:"Kleur",dia:"Diameter",siz:"Maat",vol:"Inhoud",pwr:"Vermogen",ind:"Inductie",sku:"Referentie",cat:"Categorie",unt:"EUR / stuk · netto",vid:"Video",add2:"toegevoegd",emp:"Uw selectie is leeg",tot:"Totaal — netto",ord:"Bestelling plaatsen",nop:"Geen producten",nos:"Pas filters aan",prv:"← Vorige",nxt:"Volgende →",res:"producten"},
+de:{all:"Alle Produkte",cart:"Auswahl",myCart:"Ihre Auswahl",price:"Preis — EUR",apply:"Anwenden",stock:"Nur vorrätige",in:"Auf Lager",out:"Nicht vorrätig",add:"Zur Auswahl",det:"Details",spc:"Spezifikationen",dsc:"Beschreibung",mat:"Material",col:"Farbe",dia:"Durchmesser",siz:"Größe",vol:"Volumen",pwr:"Leistung",ind:"Induktion",sku:"Referenz",cat:"Kategorie",unt:"EUR / Stück · netto",vid:"Video",add2:"hinzugefügt",emp:"Ihre Auswahl ist leer",tot:"Gesamt — netto",ord:"Bestellung aufgeben",nop:"Keine Produkte",nos:"Filter anpassen",prv:"← Zurück",nxt:"Weiter →",res:"Produkte"},
+fr:{all:"Tous les produits",cart:"Sélection",myCart:"Votre sélection",price:"Prix — EUR",apply:"Appliquer",stock:"En stock uniquement",in:"En stock",out:"Épuisé",add:"Ajouter",det:"Détails",spc:"Spécifications",dsc:"Description",mat:"Matériau",col:"Couleur",dia:"Diamètre",siz:"Taille",vol:"Volume",pwr:"Puissance",ind:"Induction",sku:"Référence",cat:"Catégorie",unt:"EUR / unité · HT",vid:"Vidéo",add2:"ajouté",emp:"Votre sélection est vide",tot:"Total — HT",ord:"Passer la commande",nop:"Aucun produit",nos:"Affiner la recherche",prv:"← Préc.",nxt:"Suiv. →",res:"produits"}
+};
+
+/* ══ STATE ═════════════════════════════════════════════ */
+let lang="en", flt=[], cart=JSON.parse(localStorage.getItem("bhc7")||"[]");
+let pg=1, PER=24, vw="g";
+let aMC=null, aSC=null, pmn=null, pmx=null, iso=false, sq="", srt="default", oMC=null;
+
+const tx = k => (TX[lang]&&TX[lang][k]) || k;
+const cn = h => { if(!h) return ""; const t=CT[h]; return t ? (t[lang]||h) : h; };
+const $ = id => document.getElementById(id);
+const H = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const E = s => String(s||"").replace(/\\/g,"\\\\").replace(/'/g,"\\'");
+
+/* ══ LANG ══════════════════════════════════════════════ */
+function setLang(l) {
+  lang = l;
+  $("SI").placeholder = l==="en"?"Search collection…":l==="nl"?"Zoek in collectie…":l==="de"?"Kollektion durchsuchen…":"Rechercher…";
+  $("CLbl").textContent = tx("cart");
+  $("CTitle").textContent = tx("myCart");
+  $("CatAll").textContent = tx("all");
+  $("AFBtn").textContent = tx("apply");
+  $("ISLabel").textContent = tx("stock");
+  buildCats(); runFlt(); updateCart();
+}
+
+/* ══ CATEGORIES ════════════════════════════════════════ */
+function buildCats() {
+  const m = {};
+  PRODUCTS.forEach(p => {
+    if (!p.mainCat) return;
+    if (!m[p.mainCat]) m[p.mainCat] = new Set();
+    if (p.subCat) m[p.mainCat].add(p.subCat);
+  });
+
+  $("CatAll").classList.toggle("active", !aMC);
+
+  let h = "";
+  Object.keys(m).sort().forEach(mc => {
+    const isO = oMC === mc;
+    const subs = [...m[mc]].sort();
+    h += `<div class="cat-group">
+      <button class="cat-main-btn${isO?" open":""}${aMC===mc&&!aSC?" active":""}" onclick="togCat('${E(mc)}')">
+        ${cn(mc)}<span class="cat-arrow">▶</span>
+      </button>
+      <div class="cat-subs${isO?" open":""}">
+        ${subs.map(sc=>`<button class="cat-sub-btn${aSC===sc?" active":""}" onclick="selCat('${E(mc)}','${E(sc)}')">${cn(sc)}</button>`).join("")}
+      </div>
+    </div>`;
+  });
+  $("CL").innerHTML = h;
+}
+
+function togCat(mc) { oMC = oMC===mc ? null : mc; aMC = oMC||null; aSC = null; pg=1; buildCats(); runFlt(); }
+function selCat(mc, sc) { aMC=mc; aSC=sc; if(mc) oMC=mc; pg=1; buildCats(); runFlt(); }
+
+/* ══ FILTERS ═══════════════════════════════════════════ */
+function applyFilters() {
+  pmn = parseFloat($("PM").value)||null;
+  pmx = parseFloat($("PX").value)||null;
+  iso = $("IS").checked;
+  srt = $("SS").value;
+  sq  = $("SI").value.toLowerCase().trim();
+  pg  = 1; runFlt();
+}
+
+function runFlt() {
+  flt = PRODUCTS.filter(p => {
+    if (aMC && p.mainCat !== aMC) return false;
+    if (aSC && p.subCat  !== aSC) return false;
+    if (pmn !== null && p.price < pmn) return false;
+    if (pmx !== null && p.price > pmx) return false;
+    if (iso && p.stock <= 0) return false;
+    if (sq && !p.title.toLowerCase().includes(sq) &&
+              !p.sku.toLowerCase().includes(sq) &&
+              !p.brand.toLowerCase().includes(sq)) return false;
+    return true;
+  });
+  if (srt==="price-asc")  flt.sort((a,b) => a.price-b.price);
+  if (srt==="price-desc") flt.sort((a,b) => b.price-a.price);
+  if (srt==="az") flt.sort((a,b) => a.title.localeCompare(b.title));
+  if (srt==="za") flt.sort((a,b) => b.title.localeCompare(a.title));
+  renderTags(); renderGrid(); renderPag();
+  $("RI").innerHTML = `<strong>${flt.length}</strong> ${tx("res")}`;
+}
+
+function renderTags() {
+  let h = "";
+  if (aMC) { const l = aSC ? cn(aMC)+" — "+cn(aSC) : cn(aMC); h += `<div class="ftag">${H(l)}<button onclick="selCat(null,null)">×</button></div>`; }
+  if (pmn!==null||pmx!==null) h += `<div class="ftag">EUR ${pmn||0} — ${pmx||"∞"}<button onclick="clrP()">×</button></div>`;
+  if (iso) h += `<div class="ftag">${tx("in")}<button onclick="clrS()">×</button></div>`;
+  if (sq)  h += `<div class="ftag">"${H(sq)}"<button onclick="clrQ()">×</button></div>`;
+  $("AT").innerHTML = h;
+}
+function clrP(){$("PM").value="";$("PX").value="";applyFilters();}
+function clrS(){$("IS").checked=false;applyFilters();}
+function clrQ(){$("SI").value="";applyFilters();}
+
+/* ══ GRID ══════════════════════════════════════════════ */
+function renderGrid() {
+  const g = $("PG");
+  g.className = "grid" + (vw==="l" ? " lv" : "");
+  const slice = flt.slice((pg-1)*PER, pg*PER);
+
+  if (!slice.length) {
+    g.innerHTML = `<div class="empty-state">
+      <span class="e-icon">✦ ✦ ✦</span>
+      <h3>${tx("nop")}</h3>
+      <p>${tx("nos")}</p>
+    </div>`;
+    return;
+  }
+
+  g.innerHTML = slice.map(p => {
+    const ok = p.stock > 0;
+    return `<div class="card${vw==="l"?" lv":""}" onclick="openM('${E(p.sku)}')">
+      <div class="card-img">
+        <img src="${E(p.image)}" alt="${H(p.title)}" loading="lazy"
+             onerror="this.parentNode.style.background='#0b0b0b';this.remove()">
+        <span class="stock-pill ${ok?"sp-in":"sp-out"}">${ok?tx("in"):tx("out")}</span>
+      </div>
+      <div class="card-body">
+        <span class="card-collection">${H(p.brand)}</span>
+        <div class="card-title">${H(p.title)}</div>
+        <div class="card-sku">${H(p.sku)}</div>
+        <div class="card-price">${p.price.toFixed(2)}<span>EUR</span></div>
+      </div>
+      <div class="card-actions" onclick="event.stopPropagation()">
+        <button class="btn-add" onclick="addC('${E(p.sku)}')" ${ok?"":"disabled"}>+ ${tx("add")}</button>
+        <button class="btn-details" onclick="openM('${E(p.sku)}')">${tx("det")}</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ══ PAGINATION ════════════════════════════════════════ */
+function renderPag() {
+  const tot = Math.ceil(flt.length / PER);
+  if (tot <= 1) { $("PAG").innerHTML = ""; return; }
+  let h = `<button class="pg" onclick="goP(${pg-1})" ${pg===1?"disabled":""}>${tx("prv")}</button>`;
+  const rng = [];
+  for (let i=Math.max(1,pg-2); i<=Math.min(tot,pg+2); i++) rng.push(i);
+  if (!rng.includes(1)) rng.unshift(1);
+  if (!rng.includes(tot)) rng.push(tot);
+  let pv = null;
+  rng.forEach(p => {
+    if (pv!==null && p-pv>1) h += `<span class="pgdot">…</span>`;
+    h += `<button class="pg${p===pg?" on":""}" onclick="goP(${p})">${p}</button>`;
+    pv = p;
+  });
+  h += `<button class="pg" onclick="goP(${pg+1})" ${pg===tot?"disabled":""}>${tx("nxt")}</button>`;
+  $("PAG").innerHTML = h;
+}
+function goP(p) { pg=p; renderGrid(); renderPag(); window.scrollTo({top:0,behavior:"smooth"}); }
+function setView(v) { vw=v; $("GB").classList.toggle("on",v==="g"); $("LB").classList.toggle("on",v==="l"); renderGrid(); }
+
+/* ══ MODAL ═════════════════════════════════════════════ */
+function getDesc(p) {
+  if (lang==="nl" && p.desc_nl) return p.desc_nl;
+  if (lang==="de" && p.desc_de) return p.desc_de;
+  if (lang==="fr" && p.desc_fr) return p.desc_fr;
+  if (p.desc_en) return p.desc_en;
+  return p.desc_hu || "";
+}
+
+function openM(sku) {
+  const p = PRODUCTS.find(x => x.sku === sku);
+  if (!p) return;
+
+  $("MEyebrow").textContent = p.brand;
+  $("MT").textContent = p.title;
+
+  const imgs = (p.images && p.images.length) ? p.images : [p.image];
+  const thumbs = imgs.map((img,i) =>
+    `<div class="gal-thumb${i===0?" on":""}" onclick="swImg(this,'${E(img)}')">
+      <img src="${E(img)}" loading="lazy" onerror="this.parentNode.style.display='none'">
+    </div>`
+  ).join("");
+
+  const specData = [
+    [tx("mat"), p.material], [tx("col"), p.color],
+    [tx("dia"), p.diameter], [tx("siz"), p.size],
+    [tx("vol"), p.volume],   [tx("pwr"), p.power],
+    [tx("ind"), p.induction],[tx("sku"), p.sku],
+    [tx("cat"), cn(p.mainCat)+(p.subCat ? " — "+cn(p.subCat) : "")]
+  ].filter(([,v]) => v && v !== "nan" && v !== "");
+
+  const specs = specData.map(([k,v]) =>
+    `<div class="m-spec-row"><span class="m-spec-key">${H(k)}</span><span class="m-spec-val">${H(v)}</span></div>`
+  ).join("");
+
+  const ok = p.stock > 0;
+  const desc = getDesc(p);
+  const ytb = (p.youtube && p.youtube !== "nan")
+    ? `<a href="https://youtube.com/watch?v=${E(p.youtube)}" target="_blank" class="m-btn-yt">▶ ${tx("vid")}</a>` : "";
+
+  $("MB").innerHTML = `
+    <div class="modal-gal">
+      <div class="gal-main"><img id="MMI" src="${E(imgs[0])}" alt="${H(p.title)}"></div>
+      <div class="gal-thumbs">${thumbs}</div>
+    </div>
+    <div class="modal-info">
+      <span class="m-collection">${H(p.brand)}</span>
+      <div class="m-title">${H(p.title)}</div>
+      <div class="m-sku">${tx("sku")}: ${H(p.sku)}</div>
+      <div class="m-rule"></div>
+      <div class="m-price-row">
+        <div class="m-price">${p.price.toFixed(2)}</div>
+        <div class="m-unit">${tx("unt")}</div>
+      </div>
+      <div class="m-stock-tag ${ok?"ms-in":"ms-out"}">${ok ? tx("in")+" · "+p.stock+" pcs" : tx("out")}</div>
+      ${desc ? `<div class="m-section"><span class="m-sec-label">${tx("dsc")}</span><div class="m-desc">${H(desc)}</div></div>` : ""}
+      ${specs ? `<div class="m-section"><span class="m-sec-label">${tx("spc")}</span>${specs}</div>` : ""}
+      <div class="m-actions">
+        <button class="m-btn-add" onclick="addC('${E(p.sku)}')" ${ok?"":"disabled"}>
+          + ${ok ? tx("add") : tx("out")}
+        </button>
+        ${ytb}
+      </div>
+    </div>`;
+
+  $("MO").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function swImg(el, url) {
+  $("MMI").src = url;
+  document.querySelectorAll(".gal-thumb").forEach(t => t.classList.remove("on"));
+  el.classList.add("on");
+}
+function cMO(e) { if (e.target === $("MO")) closeModal(); }
+function closeModal() { $("MO").classList.remove("open"); document.body.style.overflow = ""; }
+
+/* ══ CART ══════════════════════════════════════════════ */
+function addC(sku) {
+  const p = PRODUCTS.find(x => x.sku === sku);
+  if (!p || p.stock <= 0) return;
+  const ex = cart.find(x => x.sku === sku);
+  if (ex) ex.qty++; else cart.push({sku:p.sku, title:p.title, price:p.price, image:p.image, qty:1});
+  localStorage.setItem("bhc7", JSON.stringify(cart));
+  updateCart();
+  toast('"' + p.title + '" ' + tx("add2"));
+}
+function rmC(sku) { cart = cart.filter(x => x.sku!==sku); localStorage.setItem("bhc7",JSON.stringify(cart)); updateCart(); }
+function chQ(sku,d) {
+  const it = cart.find(x => x.sku===sku); if (!it) return;
+  it.qty += d;
+  if (it.qty <= 0) rmC(sku); else { localStorage.setItem("bhc7",JSON.stringify(cart)); updateCart(); }
+}
+
+function updateCart() {
+  $("CC").textContent = cart.reduce((s,x) => s+x.qty, 0);
+  const ci = $("CI"), cf = $("CF");
+  if (!cart.length) {
+    ci.innerHTML = `<div class="cart-empty"><span class="cart-empty-ornament">✦</span>${tx("emp")}</div>`;
+    cf.innerHTML = ""; return;
+  }
+  ci.innerHTML = cart.map(it => `
+    <div class="cart-item">
+      <div class="ci-img"><img src="${E(it.image)}" onerror="this.style.display='none'"></div>
+      <div class="ci-info">
+        <div class="ci-name">${H(it.title)}</div>
+        <div class="ci-sku">${H(it.sku)}</div>
+        <div class="ci-row">
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="chQ('${E(it.sku)}',-1)">−</button>
+            <span class="qty-n">${it.qty}</span>
+            <button class="qty-btn" onclick="chQ('${E(it.sku)}',1)">+</button>
+          </div>
+          <div class="ci-price">${(it.price*it.qty).toFixed(2)}</div>
+        </div>
+      </div>
+      <button class="ci-rm" onclick="rmC('${E(it.sku)}')">×</button>
+    </div>`).join("");
+
+  const grand = cart.reduce((s,x) => s+x.price*x.qty, 0);
+  cf.innerHTML = `
+    <div class="cart-total-row">
+      <span class="cart-total-lbl">${tx("tot")}</span>
+      <span class="cart-total-price">${grand.toFixed(2)}</span>
+    </div>
+    <button class="checkout-btn" onclick="openCheckout()">${tx("ord")} →</button>`;
+}
+
+function toggleCart() {
+  const p = $("CP"), s = $("SCRIM");
+  if (p.classList.contains("open")) closeCart();
+  else { p.classList.add("open"); s.classList.add("open"); document.body.style.overflow="hidden"; }
+}
+function closeCart() {
+  $("CP").classList.remove("open"); $("SCRIM").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+/* ══ TOAST ═════════════════════════════════════════════ */
+let tT;
+function toast(m) {
+  const e = $("TT"); e.textContent = m; e.classList.add("show");
+  clearTimeout(tT); tT = setTimeout(() => e.classList.remove("show"), 3500);
+}
+
+/* ══ SEARCH ════════════════════════════════════════════ */
+let sT;
+$("SI").addEventListener("input", () => { clearTimeout(sT); sT = setTimeout(applyFilters, 280); });
+
+
+/* ══════════════════════════════════════════
+   CHECKOUT LOGIC
+   ══════════════════════════════════════════ */
+
+const CONFIG = {
+  emailjs_service:  'YOUR_EMAILJS_SERVICE_ID',
+  emailjs_template: 'YOUR_EMAILJS_TEMPLATE_ID',
+  emailjs_pubkey:   'YOUR_EMAILJS_PUBLIC_KEY',
+  notify_email:     'orders@yourcompany.com',
+  mollie_profile_id: 'pfl_YOUR_PROFILE_ID',
+  mollie_test_mode:  true,
+};
+
+let coStep = 1, coType = 'b2c', coPayMethod = 'card', mollieInstance = null;
+
+function openCheckout() {
+  if (!cart.length) { toast("Your selection is empty"); return; }
+  coStep = 1;
+  renderReview();
+  setStep(1);
+  document.getElementById('COV').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  closeCart();
+}
+
+function closeCheckout() {
+  document.getElementById('COV').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function setStep(n) {
+  coStep = n;
+  document.querySelectorAll('.co-panel').forEach(p => p.classList.remove('active'));
+  const panel = n <= 3 ? document.getElementById('copanel' + n) : null;
+  if (panel) panel.classList.add('active');
+  [1,2,3].forEach(i => {
+    const el = document.getElementById('cstep' + i);
+    el.classList.remove('active','done');
+    if (i < n) el.classList.add('done');
+    else if (i === n) el.classList.add('active');
+  });
+  const backBtn = document.getElementById('co-back-btn');
+  const nextBtn = document.getElementById('co-next-btn');
+  const footer  = document.getElementById('co-footer');
+  footer.style.display = 'flex';
+  backBtn.style.visibility = n === 1 ? 'hidden' : 'visible';
+  if (n === 1) { nextBtn.textContent = 'Customer Details →'; nextBtn.className = 'co-next'; }
+  else if (n === 2) { nextBtn.textContent = 'Payment →'; nextBtn.className = 'co-next'; }
+  else if (n === 3) {
+    nextBtn.textContent = coPayMethod === 'bank' ? '✓ Place Order' : '🔒 Pay Now';
+    nextBtn.className = 'co-next pay';
+    renderPaySummary();
+    if (coPayMethod === 'card' && !mollieInstance) initMollie();
+  }
+}
+
+function coNext() {
+  if (coStep === 1) setStep(2);
+  else if (coStep === 2) { if (!validateForm()) return; setStep(3); }
+  else if (coStep === 3) submitOrder();
+}
+
+function coPrev() { if (coStep > 1) setStep(coStep - 1); }
+
+function renderReview() {
+  const items = cart.map(it => `
+    <div class="co-review-item">
+      <div class="co-ri-img"><img src="${it.image}" onerror="this.style.display='none'"></div>
+      <div class="co-ri-info">
+        <div class="co-ri-title">${it.title} <span class="co-ri-qty">× ${it.qty}</span></div>
+        <div class="co-ri-sku">${it.sku}</div>
+      </div>
+      <div class="co-ri-price">€${(it.price * it.qty).toFixed(2)}</div>
+    </div>`).join('');
+  const total = cart.reduce((s,x) => s + x.price * x.qty, 0);
+  document.getElementById('co-review-items').innerHTML = items;
+  document.getElementById('co-total-price').textContent = '€' + total.toFixed(2);
+}
+
+function setCustomerType(type) {
+  coType = type;
+  document.getElementById('btn-b2c').classList.toggle('active', type === 'b2c');
+  document.getElementById('btn-b2b').classList.toggle('active', type === 'b2b');
+  document.querySelectorAll('.co-b2b-section').forEach(el => el.classList.toggle('visible', type === 'b2b'));
+}
+
+function validateForm() {
+  const required = ['cf-fname','cf-lname','cf-email','cf-street','cf-zip','cf-city','cf-country'];
+  if (coType === 'b2b') required.push('cf-company');
+  let ok = true;
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el || !el.value.trim()) { if(el) el.classList.add('error'); ok = false; }
+    else el.classList.remove('error');
+  });
+  const email = document.getElementById('cf-email');
+  if (email && email.value && !email.value.includes('@')) { email.classList.add('error'); ok = false; }
+  if (!ok) toast('Please fill in all required fields');
+  return ok;
+}
+
+function selectPM(pm) {
+  coPayMethod = pm;
+  ['card','ideal','bank'].forEach(m => {
+    const el = document.getElementById('pm-' + m);
+    if (el) el.classList.toggle('selected', m === pm);
+  });
+  const cf = document.getElementById('co-card-fields');
+  const bi = document.getElementById('co-bank-info');
+  if (cf) cf.style.display = pm === 'card' ? 'block' : 'none';
+  if (bi) bi.style.display  = pm === 'bank'  ? 'block' : 'none';
+  const nextBtn = document.getElementById('co-next-btn');
+  if (nextBtn) {
+    nextBtn.textContent = pm === 'bank' ? '✓ Place Order' : '🔒 Pay Now';
+    nextBtn.className = 'co-next pay';
+  }
+  if (pm === 'card' && !mollieInstance) initMollie();
+}
+
+function renderPaySummary() {
+  const items = cart.map(it =>
+    `<div class="co-sum-row"><span>${it.title} ×${it.qty}</span><span>€${(it.price*it.qty).toFixed(2)}</span></div>`
+  ).join('');
+  const total = cart.reduce((s,x) => s + x.price * x.qty, 0);
+  const el = document.getElementById('co-pay-summary');
+  if (el) el.innerHTML = items + `<div class="co-sum-row total"><span>Total (excl. VAT)</span><span>€${total.toFixed(2)}</span></div>`;
+}
+
+function initMollie() {
+  if (typeof Mollie === 'undefined') {
+    const s = document.createElement('script');
+    s.src = 'https://js.mollie.com/v1/mollie.js';
+    s.onload = () => createMollieComponents();
+    document.head.appendChild(s);
+  } else { createMollieComponents(); }
+}
+
+function createMollieComponents() {
+  try {
+    mollieInstance = Mollie(CONFIG.mollie_profile_id, { locale: 'en_US', testmode: CONFIG.mollie_test_mode });
+    const style = {
+      base: { color: '#e8e2d4', fontSize: '14px', fontFamily: 'Raleway, sans-serif', '::placeholder': { color: '#5a5448' } },
+      valid: { color: '#c9a84c' }, invalid: { color: '#c04040' }
+    };
+    mollieInstance.createComponent('cardHolder', { styles: style }).mount('#mollie-card-holder');
+    mollieInstance.createComponent('cardNumber',  { styles: style }).mount('#mollie-card-number');
+    mollieInstance.createComponent('expiryDate',  { styles: style }).mount('#mollie-card-expiry');
+    mollieInstance.createComponent('verificationCode', { styles: style }).mount('#mollie-card-cvc');
+  } catch(e) {
+    const el = document.getElementById('co-card-fields');
+    if (el) el.innerHTML = '<p style="font-family:var(--raleway);font-size:13px;color:var(--fog);padding:16px;background:var(--obsidian);border:1px solid var(--shadow)">⚠ Add your Mollie Profile ID to CONFIG to enable card payments. Sign up free at <a href=\'https://mollie.com\' target=\'_blank\' style=\'color:var(--gold-dk)\'>mollie.com</a></p>';
+  }
+}
+
+async function submitOrder() {
+  if (!document.getElementById('co-terms-check').checked) { toast('Please accept the Terms & Conditions'); return; }
+  const nextBtn = document.getElementById('co-next-btn');
+  nextBtn.disabled = true;
+  nextBtn.innerHTML = '<span class="co-spinner"></span>Processing…';
+  const orderRef = 'BH-' + Date.now().toString().slice(-6);
+  const total = cart.reduce((s,x) => s + x.price * x.qty, 0);
+  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const customer = { fname: g('cf-fname'), lname: g('cf-lname'), email: g('cf-email'), phone: g('cf-phone'), company: g('cf-company'), vat: g('cf-vat'), street: g('cf-street'), zip: g('cf-zip'), city: g('cf-city'), country: g('cf-country'), state: g('cf-state'), notes: g('cf-notes'), type: coType };
+  const itemsText = cart.map(it => `${it.title} (${it.sku}) x${it.qty} = EUR ${(it.price*it.qty).toFixed(2)}`).join(' | ');
+
+  if (coPayMethod === 'card' && mollieInstance) {
+    try {
+      const { token, error } = await mollieInstance.createToken();
+      if (error) { toast(error.message || 'Card error'); nextBtn.disabled = false; nextBtn.innerHTML = '🔒 Pay Now'; return; }
+      console.log('Mollie token (send to your server):', token);
+    } catch(e) { console.warn('Mollie token:', e); }
+  }
+
+  try {
+    if (CONFIG.emailjs_pubkey !== 'YOUR_EMAILJS_PUBLIC_KEY' && typeof emailjs !== 'undefined') {
+      await emailjs.send(CONFIG.emailjs_service, CONFIG.emailjs_template, {
+        to_email: CONFIG.notify_email, order_ref: orderRef,
+        customer_name: customer.fname + ' ' + customer.lname,
+        customer_email: customer.email, customer_phone: customer.phone || '-',
+        company: customer.company || '-', vat: customer.vat || '-',
+        type: customer.type.toUpperCase(),
+        address: customer.street + ', ' + customer.zip + ' ' + customer.city + ', ' + customer.country,
+        notes: customer.notes || '-', items: itemsText,
+        total: 'EUR ' + total.toFixed(2), payment: coPayMethod,
+      });
+    }
+  } catch(e) { console.warn('EmailJS:', e); }
+
+  cart = []; localStorage.setItem('bhc7', JSON.stringify(cart)); updateCart();
+  document.getElementById('co-order-ref').textContent = 'Order #' + orderRef;
+  document.getElementById('co-footer').style.display = 'none';
+  document.querySelectorAll('.co-step').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+  document.querySelectorAll('.co-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('copanel-success').classList.add('active');
+  nextBtn.disabled = false;
+}
+
+
+/* ══ BOOT ══════════════════════════════════════════════ */
+if (typeof PRODUCTS === "undefined") {
+  document.getElementById("PG").innerHTML = '<div class="empty-state"><span class="e-icon">✦</span><h3>products_data.js not found</h3><p>Place both files in the same folder</p></div>';
+} else {
+  buildCats(); applyFilters(); updateCart();
+}
+
+/* ── ESC KEY — closes any open overlay ── */
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Escape') return;
+  const cov = document.getElementById('COV');
+  if (cov && cov.classList.contains('open')) { closeCheckout(); return; }
+  const mo = document.getElementById('MO');
+  if (mo && mo.classList.contains('open')) { closeModal(); return; }
+  const cp = document.getElementById('CP');
+  if (cp && cp.classList.contains('open')) { closeCart(); return; }
+});
+
+</script>
+
+<!-- ─── CHECKOUT OVERLAY ──────────────── -->
+<div class="checkout-overlay" id="COV" onclick="if(event.target===this)closeCheckout()">
+  <div class="checkout-modal">
+
+    <!-- HEADER / STEPS -->
+    <div class="co-header">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:4px">
+        <span style="font-family:var(--bb,sans-serif);font-size:12px;letter-spacing:.1em;color:var(--dim,#888);text-transform:uppercase">Checkout</span>
+        <button onclick="closeCheckout()" title="Cancel order (Esc)" style="background:none;border:1px solid var(--faint,#3a3a3a);border-radius:6px;color:var(--dim,#888);width:30px;height:30px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;" onmouseover="this.style.borderColor='#c04040';this.style.color='#e07070'" onmouseout="this.style.borderColor='var(--faint,#3a3a3a)';this.style.color='var(--dim,#888)'">✕</button>
+      </div>
+      <div class="co-steps" id="CO_Steps">
+        <div class="co-step active" id="cstep1">
+          <div class="co-step-num">1</div>
+          <span class="co-step-label">Review</span>
+        </div>
+        <div class="co-step" id="cstep2">
+          <div class="co-step-num">2</div>
+          <span class="co-step-label">Details</span>
+        </div>
+        <div class="co-step" id="cstep3">
+          <div class="co-step-num">3</div>
+          <span class="co-step-label">Payment</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="co-body">
+
+      <!-- STEP 1: Review -->
+      <div class="co-panel active" id="copanel1">
+        <div id="co-review-items"></div>
+        <div class="co-total-row">
+          <span class="co-total-lbl">Order Total (net)</span>
+          <span class="co-total-price" id="co-total-price">€0.00</span>
+        </div>
+      </div>
+
+      <!-- STEP 2: Customer Details -->
+      <div class="co-panel" id="copanel2">
+        <div class="co-type-toggle">
+          <button class="co-type-btn active" id="btn-b2c" onclick="setCustomerType('b2c')">Private / B2C</button>
+          <button class="co-type-btn" id="btn-b2b" onclick="setCustomerType('b2b')">Business / B2B</button>
+        </div>
+
+        <div class="co-form-grid" id="co-form">
+          <!-- Always shown -->
+          <div class="co-field">
+            <label class="co-label">First Name *</label>
+            <input class="co-input" id="cf-fname" type="text" placeholder="Anna">
+          </div>
+          <div class="co-field">
+            <label class="co-label">Last Name *</label>
+            <input class="co-input" id="cf-lname" type="text" placeholder="De Vries">
+          </div>
+          <div class="co-field">
+            <label class="co-label">Email *</label>
+            <input class="co-input" id="cf-email" type="email" placeholder="anna@company.nl">
+          </div>
+          <div class="co-field">
+            <label class="co-label">Phone</label>
+            <input class="co-input" id="cf-phone" type="tel" placeholder="+31 6 1234 5678">
+          </div>
+
+          <!-- B2B fields -->
+          <div class="co-section-title co-b2b-section" id="b2b-title">Company Information</div>
+          <div class="co-field co-b2b-section" id="b2b-company">
+            <label class="co-label">Company Name *</label>
+            <input class="co-input" id="cf-company" type="text" placeholder="Your Company B.V.">
+          </div>
+          <div class="co-field co-b2b-section" id="b2b-vat">
+            <label class="co-label">VAT Number</label>
+            <input class="co-input" id="cf-vat" type="text" placeholder="NL123456789B01">
+          </div>
+
+          <!-- Delivery address -->
+          <div class="co-section-title">Delivery Address</div>
+          <div class="co-field full">
+            <label class="co-label">Street & Number *</label>
+            <input class="co-input" id="cf-street" type="text" placeholder="Keizersgracht 123">
+          </div>
+          <div class="co-field">
+            <label class="co-label">Postal Code *</label>
+            <input class="co-input" id="cf-zip" type="text" placeholder="1015 CJ">
+          </div>
+          <div class="co-field">
+            <label class="co-label">City *</label>
+            <input class="co-input" id="cf-city" type="text" placeholder="Amsterdam">
+          </div>
+          <div class="co-field">
+            <label class="co-label">Country *</label>
+            <input class="co-input" id="cf-country" type="text" placeholder="Netherlands" value="Netherlands">
+          </div>
+          <div class="co-field">
+            <label class="co-label">State / Province</label>
+            <input class="co-input" id="cf-state" type="text" placeholder="North Holland">
+          </div>
+
+          <!-- Notes -->
+          <div class="co-field full">
+            <label class="co-label">Order Notes</label>
+            <textarea class="co-notes-field" id="cf-notes" placeholder="Delivery instructions, special requests…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Payment -->
+      <div class="co-panel" id="copanel3">
+
+        <div class="co-order-summary" id="co-pay-summary"></div>
+
+        <div class="co-payment-methods">
+          <label class="co-pm selected" id="pm-card" onclick="selectPM('card')">
+            <input type="radio" name="pm" value="card" checked>
+            <div class="co-pm-icon">💳</div>
+            <span class="co-pm-label">Credit / Debit Card</span>
+            <span class="co-pm-sub">Visa · Mastercard · Amex</span>
+          </label>
+          <label class="co-pm" id="pm-ideal" onclick="selectPM('ideal')">
+            <input type="radio" name="pm" value="ideal">
+            <div class="co-pm-icon" style="font-size:14px;font-weight:700;color:#c04;">iDEAL</div>
+            <span class="co-pm-label">iDEAL</span>
+            <span class="co-pm-sub">Dutch bank transfer</span>
+          </label>
+          <label class="co-pm" id="pm-bank" onclick="selectPM('bank')">
+            <input type="radio" name="pm" value="bank">
+            <div class="co-pm-icon">🏦</div>
+            <span class="co-pm-label">Bank Transfer</span>
+            <span class="co-pm-sub">Invoice — pay within 14 days</span>
+          </label>
+        </div>
+
+        <!-- Mollie card fields (shown when card selected) -->
+        <div id="co-card-fields">
+          <div class="co-card-full">
+            <div class="co-label" style="margin-bottom:6px">Card Holder Name</div>
+            <div id="mollie-card-holder"></div>
+          </div>
+          <div class="co-card-grid">
+            <div>
+              <div class="co-label" style="margin-bottom:6px">Card Number</div>
+              <div id="mollie-card-number"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <div class="co-label" style="margin-bottom:6px">Expiry</div>
+                <div id="mollie-card-expiry"></div>
+              </div>
+              <div>
+                <div class="co-label" style="margin-bottom:6px">CVC</div>
+                <div id="mollie-card-cvc"></div>
+              </div>
+            </div>
+          </div>
+          <p style="font-family:var(--raleway);font-size:11px;color:var(--fog);margin-top:10px;font-weight:300;letter-spacing:.03em">
+            🔒 Secured by Mollie · PCI DSS Level 1 · Your card details are never stored.
+          </p>
+        </div>
+
+        <!-- Bank transfer instructions -->
+        <div id="co-bank-info" style="display:none">
+          <div style="background:var(--obsidian);border:1px solid var(--shadow);padding:16px;margin-top:8px">
+            <p style="font-family:var(--cinzel);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:10px">Bank Transfer Details</p>
+            <p style="font-family:var(--garamond);font-size:14px;color:var(--mist);line-height:1.9">
+              You will receive a proforma invoice by email within 24 hours.<br>
+              Payment due within 14 days of order confirmation.<br>
+              IBAN: NL00 BANK 0000 0000 00<br>
+              BIC/SWIFT: BANKNL2A<br>
+              Reference: your order number (sent by email)
+            </p>
+          </div>
+        </div>
+
+        <div class="co-terms" style="margin-top:16px">
+          <input type="checkbox" id="co-terms-check">
+          <span>I agree to the <a href="#" style="color:var(--gold-dk)">Terms & Conditions</a> and <a href="#" style="color:var(--gold-dk)">Privacy Policy</a>. Net prices exclude VAT.</span>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="co-panel" id="copanel-success">
+        <div class="co-success">
+          <span class="co-success-icon">✦</span>
+          <h2>Order Placed</h2>
+          <p>Thank you for your order. A confirmation has been sent to your email address.</p>
+          <p>Our team will be in touch within one business day to confirm availability and next steps.</p>
+          <div class="co-order-ref" id="co-order-ref">Order #BH-000000</div>
+          <button class="co-success-close" onclick="closeCheckout()">Continue Browsing</button>
+        </div>
+      </div>
+
+    </div><!-- /co-body -->
+
+    <!-- FOOTER -->
+    <div class="co-footer" id="co-footer">
+      <button class="co-back" id="co-back-btn" onclick="coPrev()">← Back</button>
+      <button class="co-next" id="co-next-btn" onclick="coNext()">Review Order →</button>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
